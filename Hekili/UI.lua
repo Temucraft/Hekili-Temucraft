@@ -28,7 +28,7 @@ local GetSpecializationInfo = GetSpecializationInfo or function()
 end
 local HasVehicleActionBar, HasOverrideActionBar, UnitHasVehicleUI, UnitOnTaxi = HasVehicleActionBar, HasOverrideActionBar, UnitHasVehicleUI, UnitOnTaxi
 local IsInPetBattle = Hekili.IsWrath() and function() return false end or C_PetBattles.IsInBattle
-local IsSpellOverlayed = _G.IsSpellOverlayed or function() return false end
+local IsSpellOverlayed = IsSpellOverlayed or function() return false end -- Temucraft: proc glows from Temucraft.lua
 
 local Masque, MasqueGroup
 local _

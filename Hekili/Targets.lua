@@ -471,6 +471,14 @@ do
             end
         end
 
+        -- Temucraft: mod-temucraft-rotation counts the enemies fighting you or your group (3.3.5 nameplates can't).
+        local serverCount = HekiliTemucraft.ServerEnemies( spec and spec.nameplateRange or 8 )
+        if serverCount and serverCount > count then
+            stationary = stationary + ( serverCount - count )
+            Hekili.TargetDebug = format( "%s    %-12s - %2d enemies\n", Hekili.TargetDebug, "server", serverCount )
+            count = serverCount
+        end
+
         count = max( 1, count )
 
         if count ~= lastCount or stationary ~= lastStationary then
@@ -1023,6 +1031,10 @@ do
             return default
         end
 
+        -- Temucraft: time to die from mod-temucraft-rotation (it sees every enemy's health over time).
+        local serverTTD = HekiliTemucraft.ServerTTD( guid )
+        if serverTTD then return max( 1, serverTTD ), 10 end
+
         local enemy = db[guid]
         if not enemy then
             return default
@@ -1107,6 +1119,13 @@ do
             end
         end
 
+        -- Temucraft: include the server's times to die.
+        local serverHigh = HekiliTemucraft.ServerTTDRange()
+        if serverHigh then
+            time = max( time, serverHigh )
+            validUnit = true
+        end
+
         if not validUnit then return state.boss and FOREVER or DEFAULT_TTD end
 
         return time
@@ -1139,6 +1158,13 @@ do
                 time = min( time, max( 0, v.deathTime ) )
                 validUnit = true
             end
+        end
+
+        -- Temucraft: include the server's times to die.
+        local _, serverLow = HekiliTemucraft.ServerTTDRange()
+        if serverLow then
+            time = min( time, serverLow )
+            validUnit = true
         end
 
         if not validUnit then

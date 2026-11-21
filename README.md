@@ -49,15 +49,28 @@ The first commit is the upstream branch as downloaded. Changes in the Lua files 
 - **Atlases**: the few option icons that were atlases use whole 3.3.5 textures.
 - **Menu**: the retail slider in the display menu became a list of values (3.3.5 dropdowns have no custom frames).
 - A call to an undefined function in the target debug text was fixed.
+- **Proc glows**: 3.3.5 has no "spell activation overlay", so `Temucraft.lua` watches your buffs (Hot Streak,
+  Brain Freeze, Art of War, Maelstrom Weapon at 5, Killing Machine, Rime, Lock and Load, Sudden Death, Slam!,
+  Sword and Board, Backlash, Nightfall, Molten Core, Decimation, Eclipse, Surge of Light and others) and lights
+  the abilities they make ready.
+
+## With mod-temucraft-rotation on the server
+
+[mod-temucraft-rotation](https://github.com/Temucraft/mod-temucraft-rotation) (its own repository) sends what
+the client can't see. The addon asks for it at login and uses it while it is fresh (3 seconds); without the module
+it works from the client alone.
+
+- **Enemy count**: the number of enemies fighting you or your group within your spec's target range. Hekili
+  takes the higher of its own count and the server's, so AoE suggestions work without nameplates.
+- **Total haste**, with every buff counted (Bloodlust, Heroism, talents, debuffs on you).
+- **Time to die** of your target and nearby enemies, from their health on the server.
 
 ## What doesn't work on 3.3.5
 
 - Spell charges, loss of control data and phasing information don't exist on this client.
-- Haste comes from haste rating (3.3.5 has no total haste function), so haste buffs such as Bloodlust are only
-  counted where the class files add them.
+- Without mod-temucraft-rotation, haste comes from haste rating (3.3.5 has no total haste function).
 - Temucraft's own class changes and new spells aren't in the action lists yet; suggestions follow the stock
   Wrath rotations.
-- Glows for spell procs ("spell activation overlay") don't exist on 3.3.5.
 
 ## Status
 

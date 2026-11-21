@@ -9,7 +9,7 @@
 -- Hekili writes still go to _G.
 
 local _G = _G
-local type, tonumber, select, pairs, next, setmetatable, rawget = type, tonumber, select, pairs, next, setmetatable, rawget
+local type, tonumber, select, pairs, ipairs, next, setmetatable, rawget = type, tonumber, select, pairs, ipairs, next, setmetatable, rawget
 local floor = math.floor
 
 local TC = TemucraftCompat or {}
@@ -442,6 +442,170 @@ events:SetScript( "OnEvent", function( _, event )
     if event == "SPELLS_CHANGED" or event == "LEARNED_SPELL_IN_TAB" then T.ClearSpellIds() end
     talentsDirty = true
 end )
+
+
+
+-- ------------------------------------------------------------------------------------------------ proc glows
+-- Newer clients light up an ability when a proc makes it ready (IsSpellOverlayed). 3.3.5 has no such event, so the
+-- player's buffs are watched here: buff spell id -> the abilities it lights (spell ids, any rank), [stacks needed].
+local PROCS = {
+    [ 48108 ] = { 11366 },                          -- Hot Streak: Pyroblast
+    [ 57761 ] = { 133, 44614 },                     -- Brain Freeze: Fireball, Frostfire Bolt
+    [ 44401 ] = { 5143 },                           -- Missile Barrage: Arcane Missiles
+    [ 44544 ] = { 30455, 44572 },                   -- Fingers of Frost: Ice Lance, Deep Freeze
+    [ 54741 ] = { 2120 },                           -- Firestarter: Flamestrike
+    [ 59578 ] = { 879, 19750 },                     -- The Art of War: Exorcism, Flash of Light
+    [ 54149 ] = { 19750, 635 },                     -- Infusion of Light: Flash of Light, Holy Light
+    [ 53817 ] = { 403, 421, 331, 8004, 1064, stacks = 5 },   -- Maelstrom Weapon (5): Lightning Bolt, Chain Lightning, heals
+    [ 51124 ] = { 45477, 49184, 49143 },            -- Killing Machine: Icy Touch, Howling Blast, Frost Strike
+    [ 59052 ] = { 49184, 45477 },                   -- Freezing Fog (Rime): Howling Blast, Icy Touch
+    [ 56453 ] = { 3044, 53301 },                    -- Lock and Load: Arcane Shot, Explosive Shot
+    [ 53220 ] = { 19434, 3044, 53209 },             -- Improved Steady Shot: Aimed Shot, Arcane Shot, Chimera Shot
+    [ 52437 ] = { 5308 },                           -- Sudden Death: Execute
+    [ 46916 ] = { 1464 },                           -- Slam!: Slam
+    [ 50227 ] = { 23922 },                          -- Sword and Board: Shield Slam
+    [ 60503 ] = { 7384 },                           -- Taste for Blood: Overpower
+    [ 32216 ] = { 34428 },                          -- Victorious: Victory Rush
+    [ 34936 ] = { 686, 29722 },                     -- Backlash: Shadow Bolt, Incinerate
+    [ 17941 ] = { 686 },                            -- Shadow Trance (Nightfall): Shadow Bolt
+    [ 47383 ] = { 29722, 6353 },                    -- Molten Core: Incinerate, Soul Fire
+    [ 63165 ] = { 6353 },                           -- Decimation: Soul Fire
+    [ 48517 ] = { 5176 },                           -- Eclipse (Solar): Wrath
+    [ 48518 ] = { 2912 },                           -- Eclipse (Lunar): Starfire
+    [ 69369 ] = { 8936, 5185, 339, 33786 },         -- Predator's Swiftness: Regrowth, Healing Touch, Roots, Cyclone
+    [ 33151 ] = { 585, 2061 },                      -- Surge of Light: Smite, Flash Heal
+}
+local lit = {}          -- ability name -> true while a proc lights it
+local procWatch = CreateFrame( "Frame" )
+local function ScanProcs()
+    for k in pairs( lit ) do lit[ k ] = nil end
+    local i = 1
+    while true do
+        local name, _, _, count, _, _, _, _, _, _, spellID = _G.UnitBuff( "player", i )
+        if not name then break end
+        local proc = spellID and PROCS[ spellID ]
+        if proc and ( not proc.stacks or ( count or 0 ) >= proc.stacks ) then
+            for _, id in ipairs( proc ) do
+                local ability = GetSpellInfo335( id )
+                if ability then lit[ ability ] = true end
+            end
+        end
+        i = i + 1
+    end
+end
+procWatch:RegisterEvent( "UNIT_AURA" )
+procWatch:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+procWatch:SetScript( "OnEvent", function( _, event, unit )
+    if event == "PLAYER_ENTERING_WORLD" or unit == "player" then ScanProcs() end
+end )
+o.IsSpellOverlayed = function( id )
+    if not id then return false end
+    local name = GetSpellInfo335( id )
+    return name and lit[ name ] or false
+end
+
+-- ------------------------------------------------------------------------------------------------ server data
+-- With mod-temucraft-rotation on the server, Hekili asks for facts the 3.3.5 client doesn't give: total haste,
+-- the number of enemies fighting you or your group per range, and the time to die of nearby enemies. Without the
+-- module nothing answers and Hekili works from the client alone, as before.
+local PREFIX = "HKR"
+local server = { at = 0, ttdAt = 0, counts = {}, ranges = {}, ttd = {} }
+T.server = server
+local FRESH = 3   -- seconds a server message stays valid
+
+local function fresh( at ) return at > 0 and _G.GetTime() - at < FRESH end
+
+local function hello()
+    if _G.SendAddonMessage then _G.SendAddonMessage( PREFIX, "HI", "WHISPER", ( _G.UnitName( "player" ) ) ) end
+end
+
+local comm = CreateFrame( "Frame" )
+local asked, answered, askTimer = 0, false, 0
+comm:RegisterEvent( "CHAT_MSG_ADDON" )
+comm:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+comm:SetScript( "OnEvent", function( _, event, prefix, text, channel, sender )
+    if event == "PLAYER_ENTERING_WORLD" then
+        hello()
+        asked = 1
+        return
+    end
+    if prefix ~= PREFIX or channel ~= "WHISPER" or sender ~= _G.UnitName( "player" ) or type( text ) ~= "string" then return end
+    local kind, rest = text:match( "^(%a+)~?(.*)$" )
+    if kind == "OK" then
+        answered = true
+    elseif kind == "S" then
+        answered = true
+        local melee, ranged, spell, list = rest:match( "^([%d%.%-]+)~([%d%.%-]+)~([%d%.%-]+)~(.*)$" )
+        if not melee then return end
+        server.melee, server.ranged, server.spell = tonumber( melee ), tonumber( ranged ), tonumber( spell )
+        for k in pairs( server.counts ) do server.counts[ k ] = nil end
+        for i = #server.ranges, 1, -1 do server.ranges[ i ] = nil end
+        for range, n in list:gmatch( "(%d+):(%d+)" ) do
+            range, n = tonumber( range ), tonumber( n )
+            server.counts[ range ] = n
+            server.ranges[ #server.ranges + 1 ] = range
+        end
+        table.sort( server.ranges )
+        server.at = _G.GetTime()
+    elseif kind == "T" then
+        for k in pairs( server.ttd ) do server.ttd[ k ] = nil end
+        for guid, secs in rest:gmatch( "(0x%x+):(%d+)" ) do server.ttd[ guid:upper():gsub( "^0X", "0x" ) ] = tonumber( secs ) end
+        server.ttdAt = _G.GetTime()
+    end
+end )
+-- Ask again a few times after login in case the first message was too early.
+comm:SetScript( "OnUpdate", function( _, elapsed )
+    if answered or asked == 0 or asked >= 4 then return end
+    askTimer = askTimer + elapsed
+    if askTimer > 10 then
+        askTimer = 0
+        asked = asked + 1
+        hello()
+    end
+end )
+
+-- Number of enemies in combat with you or your group within `range` yards (the smallest sent range that covers
+-- it), or nil without fresh server data.
+function T.ServerEnemies( range )
+    if not fresh( server.at ) then return nil end
+    range = range or 8
+    for _, r in ipairs( server.ranges ) do
+        if r >= range then return server.counts[ r ] end
+    end
+    local last = server.ranges[ #server.ranges ]
+    return last and server.counts[ last ] or nil
+end
+
+-- Seconds until the enemy with this GUID dies, or nil.
+function T.ServerTTD( guid )
+    if not guid or not fresh( server.ttdAt ) then return nil end
+    return server.ttd[ guid ]
+end
+
+-- Greatest / lowest time to die among the enemies the server sent, or nil.
+function T.ServerTTDRange()
+    if not fresh( server.ttdAt ) then return nil end
+    local high, low
+    for _, secs in pairs( server.ttd ) do
+        high = high and math.max( high, secs ) or secs
+        low = low and math.min( low, secs ) or secs
+    end
+    return high, low
+end
+
+-- Haste: the server's total haste (every buff counted) when it sends it, haste rating otherwise.
+o.UnitSpellHaste = function()
+    if fresh( server.at ) and server.spell then return server.spell end
+    return GetCombatRatingBonus( _G.CR_HASTE_SPELL )
+end
+o.GetMeleeHaste = function()
+    if fresh( server.at ) and server.melee then return server.melee end
+    return GetCombatRatingBonus( _G.CR_HASTE_MELEE )
+end
+o.GetRangedHaste = function()
+    if fresh( server.at ) and server.ranged then return server.ranged end
+    return GetCombatRatingBonus( _G.CR_HASTE_RANGED )
+end
 
 -- ------------------------------------------------------------------------------------------------ environment
 -- The stand-ins and namespace proxies are kept in the lookup table after the first read; everything else is

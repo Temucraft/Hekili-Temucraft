@@ -45,7 +45,7 @@ end
 local IsTalentSpell = _G.IsTalentSpell or function() return false end
 local IsPressHoldReleaseSpell = _G.IsPressHoldReleaseSpell or function() return false end
 local UnitEffectiveLevel = _G.UnitEffectiveLevel or UnitLevel
-local UnitSpellHaste = _G.UnitSpellHaste or function() return 0 end
+local UnitSpellHaste = UnitSpellHaste or function() return 0 end
 
 
 
