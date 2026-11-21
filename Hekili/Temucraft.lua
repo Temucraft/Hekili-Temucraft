@@ -63,7 +63,7 @@ local function byName( spell )
     if type( spell ) == "number" then return ( GetSpellInfo335( spell ) ) end
     return spell
 end
-for _, fn in pairs( { "IsSpellInRange", "IsHarmfulSpell", "IsHelpfulSpell", "SpellHasRange" } ) do
+for _, fn in pairs( { "IsSpellInRange", "IsHarmfulSpell", "IsHelpfulSpell", "SpellHasRange", "IsUsableSpell", "IsPassiveSpell" } ) do
     local real = _G[ fn ]
     if real then
         o[ fn ] = function( spell, ... )
@@ -150,6 +150,27 @@ o.FindSpellBookSlotBySpellID = function( id )
     return byNameSlot
 end
 
+
+-- Action bars, macros and the cursor: newer clients give spell ids where 3.3.5 gives spell book slots or names.
+-- 3.3.5 GetActionInfo: type, id (spell book slot for spells), subType, spellID
+o.GetActionInfo = function( slot )
+    local kind, id, sub, spellID = _G.GetActionInfo( slot )
+    if kind == "spell" then return kind, spellID or id, sub end
+    return kind, id, sub
+end
+o.GetMacroSpell = function( macro )
+    local name, rank = _G.GetMacroSpell( macro )
+    if not name then return nil end
+    return SpellIdByName( name, rank )
+end
+o.GetCursorInfo = function()
+    local kind, a, b, c = _G.GetCursorInfo()
+    if kind == "spell" and c == nil then
+        return kind, a, b, idFromLink( GetSpellLink( a, b ) )
+    end
+    return kind, a, b, c
+end
+
 -- ------------------------------------------------------------------------------------------------ units
 o.UnitAura = Modern.UnitAura
 o.UnitBuff = Modern.UnitBuff
@@ -164,6 +185,12 @@ o.GetSpecialization = function() return _G.GetActiveTalentGroup and _G.GetActive
 o.GetSpecializationInfo = function()
     local name, baseName, id = _G.UnitClass( "player" )
     return id, baseName, name
+end
+
+-- 3.3.5 UnitClassBase gives (localized name, class file); newer clients give (class file, class id).
+o.UnitClassBase = function( unit )
+    local _, file, id = _G.UnitClass( unit )
+    return file, id
 end
 
 o.GetNumClasses = function() return _G.MAX_CLASSES or 11 end   -- class ids 1-11 (no 10 on 3.3.5)
@@ -191,6 +218,23 @@ o.Enum = setmetatable( {
         Insanity = 13, Obsolete = 14, Obsolete2 = 15, ArcaneCharges = 16, Fury = 17, Pain = 18, Essence = 19,
         RuneBlood = 20, RuneFrost = 21, RuneUnholy = 22, NumPowerTypes = 23 }, { __index = _G.Enum and _G.Enum.PowerType } ),
 }, { __index = function( _, k ) return _G.Enum and _G.Enum[ k ] end } )
+
+
+-- Combo points aren't a unit power on 3.3.5: read them with GetComboPoints, 5 at most.
+local UnitPower, UnitPowerMax = _G.UnitPower, _G.UnitPowerMax
+o.UnitPower = function( unit, kind, ... )
+    if kind == 4 then
+        if unit == "player" or unit == "vehicle" then return _G.GetComboPoints( unit, "target" ) or 0 end
+        return 0
+    end
+    if kind and ( kind < 0 or kind > 6 ) then return 0 end   -- power types past runic power don't exist here
+    return UnitPower( unit, kind, ... )
+end
+o.UnitPowerMax = function( unit, kind, ... )
+    if kind == 4 then return 5 end
+    if kind and ( kind < 0 or kind > 6 ) then return 0 end
+    return UnitPowerMax( unit, kind, ... )
+end
 
 -- ------------------------------------------------------------------------------------------------ misc stats
 o.GetNetStats = function()   -- newer clients split latency into home and world
