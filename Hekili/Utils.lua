@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Utils.lua
 -- June 2014
 
@@ -639,7 +640,7 @@ do
         end
 
         local a = C_Texture.GetAtlasInfo( atlas )
-        if not a then return atlas end
+        if not a then return "" end -- Temucraft: no atlas on 3.3.5 (upstream showed the atlas name)
 
         AddTexString( atlas, a.file, a.width, a.height, a.leftTexCoord, a.rightTexCoord, a.topTexCoord, a.bottomTexCoord )
         return GetTexString( atlas, width, height, x, y, r, g, b )

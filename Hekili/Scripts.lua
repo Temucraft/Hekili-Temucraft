@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Scripts.lua
 -- December 2014
 

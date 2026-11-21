@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'PALADIN' then return end
 
 local addon, ns = ...
@@ -659,7 +660,7 @@ spec:RegisterAbilities( {
 
         talent = "aura_mastery",
         startsCombat = false,
-        texture = 135872,
+        texture = "Interface\\Icons\\spell_holy_auramastery",
 
         toggle = "cooldowns",
 
@@ -681,7 +682,7 @@ spec:RegisterAbilities( {
 
         talent = "avengers_shield",
         startsCombat = true,
-        texture = 135874,
+        texture = "Interface\\Icons\\spell_holy_avengersshield",
 
         handler = function ()
             applyDebuff( "target", "avengers_shield" )
@@ -703,7 +704,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135875,
+        texture = "Interface\\Icons\\spell_holy_avenginewrath",
 
         toggle = "cooldowns",
 
@@ -727,7 +728,7 @@ spec:RegisterAbilities( {
 
         talent = "beacon_of_light",
         startsCombat = false,
-        texture = 236247,
+        texture = "Interface\\Icons\\ability_paladin_beaconoflight",
 
         handler = function ()
             applyBuff( "beacon_of_light" )
@@ -746,7 +747,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135995,
+        texture = "Interface\\Icons\\spell_magic_magearmor",
 
         handler = function ()
             removeBuff( "blessing" )
@@ -766,7 +767,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135906,
+        texture = "Interface\\Icons\\spell_holy_fistofjustice",
 
         handler = function ()
             removeBuff( "blessing" )
@@ -789,7 +790,7 @@ spec:RegisterAbilities( {
 
         talent = "blessing_of_sanctuary",
         startsCombat = false,
-        texture = 136051,
+        texture = "Interface\\Icons\\spell_nature_lightningshield",
 
         handler = function ()
             removeBuff( "blessing" )
@@ -809,7 +810,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135970,
+        texture = "Interface\\Icons\\spell_holy_sealofwisdom",
 
         handler = function ()
             removeBuff( "blessing" )
@@ -831,7 +832,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135953,
+        texture = "Interface\\Icons\\spell_holy_renew",
 
         buff = function()
             if buff.dispellable_poison.up then return "dispellable_poison" end
@@ -855,7 +856,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135933,
+        texture = "Interface\\Icons\\spell_holy_mindsooth",
 
         handler = function ()
             removeBuff( "aura" )
@@ -875,7 +876,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135926,
+        texture = "Interface\\Icons\\spell_holy_innerfire",
 
         handler = function ()
             applyBuff( "active_consecration" )
@@ -894,7 +895,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135890,
+        texture = "Interface\\Icons\\spell_holy_crusaderaura",
 
         handler = function ()
             removeBuff( "aura" )
@@ -915,7 +916,7 @@ spec:RegisterAbilities( {
 
         talent = "crusader_strike",
         startsCombat = true,
-        texture = 135891,
+        texture = "Interface\\Icons\\spell_holy_crusaderstrike",
 
         handler = function ()
             if set_bonus.libram_of_three_truths then
@@ -933,7 +934,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135893,
+        texture = "Interface\\Icons\\spell_holy_devotionaura",
 
         nobuff = "devotion_aura",
 
@@ -956,7 +957,7 @@ spec:RegisterAbilities( {
 
         talent = "divine_favor",
         startsCombat = false,
-        texture = 135915,
+        texture = "Interface\\Icons\\spell_holy_heal",
 
         toggle = "cooldowns",
 
@@ -975,7 +976,7 @@ spec:RegisterAbilities( {
 
         talent = "divine_illumination",
         startsCombat = false,
-        texture = 135895,
+        texture = "Interface\\Icons\\spell_holy_divineillumination",
 
         toggle = "cooldowns",
 
@@ -993,7 +994,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 136106,
+        texture = "Interface\\Icons\\spell_nature_timestop",
 
         toggle = "cooldowns",
 
@@ -1012,7 +1013,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 237537,
+        texture = "Interface\\Icons\\spell_holy_aspiration",
         nobuff = "divine_plea",
 
         toggle = "cooldowns",
@@ -1034,7 +1035,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135954,
+        texture = "Interface\\Icons\\spell_holy_restoration",
 
         toggle = "defensives",
 
@@ -1056,7 +1057,7 @@ spec:RegisterAbilities( {
 
         talent = "divine_sacrifice",
         startsCombat = false,
-        texture = 253400,
+        texture = "Interface\\Icons\\spell_holy_powerwordbarrier",
 
         toggle = "cooldowns",
 
@@ -1077,7 +1078,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135896,
+        texture = "Interface\\Icons\\spell_holy_divineintervention",
 
         toggle = "defensives",
 
@@ -1102,7 +1103,7 @@ spec:RegisterAbilities( {
 
         talent = "divine_storm",
         startsCombat = true,
-        texture = 236250,
+        texture = "Interface\\Icons\\ability_paladin_divinestorm",
 
         handler = function ()
         end,
@@ -1120,7 +1121,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135903,
+        texture = "Interface\\Icons\\spell_holy_excorcism_02",
 
         handler = function ()
             removeBuff("the_art_of_war")
@@ -1138,7 +1139,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135824,
+        texture = "Interface\\Icons\\spell_fire_sealoffire",
 
         nobuff = "fire_resistance_aura",
 
@@ -1160,7 +1161,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135907,
+        texture = "Interface\\Icons\\spell_holy_flashheal",
 
         handler = function ()
             removeBuff( "divine_favor" )
@@ -1180,7 +1181,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135865,
+        texture = "Interface\\Icons\\spell_frost_wizardmark",
 
         nobuff = "frost_resistance_aura",
 
@@ -1202,7 +1203,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135993,
+        texture = "Interface\\Icons\\spell_magic_greaterblessingofkings",
 
         item = 21177,
         bagItem = true,
@@ -1225,7 +1226,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135908,
+        texture = "Interface\\Icons\\spell_holy_greaterblessingofkings",
 
         item = 21177,
         bagItem = true,
@@ -1250,7 +1251,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135912,
+        texture = "Interface\\Icons\\spell_holy_greaterblessingofwisdom",
 
         item = 21177,
         bagItem = true,
@@ -1275,7 +1276,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135963,
+        texture = "Interface\\Icons\\spell_holy_sealofmight",
 
         toggle = "interrupts",
 
@@ -1299,7 +1300,7 @@ spec:RegisterAbilities( {
 
         talent = "hammer_of_the_righteous",
         startsCombat = true,
-        texture = 236253,
+        texture = "Interface\\Icons\\ability_paladin_hammeroftherighteous",
         clash = 0.4,
 
         handler = function ()
@@ -1318,7 +1319,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132326,
+        texture = "Interface\\Icons\\ability_thunderclap",
 
         usable = function() return target.health.pct < 20 end,
 
@@ -1340,7 +1341,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135968,
+        texture = "Interface\\Icons\\spell_holy_sealofvalor",
 
         handler = function ()
             applyBuff( "hand_of_freedom" )
@@ -1359,7 +1360,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135964,
+        texture = "Interface\\Icons\\spell_holy_sealofprotection",
 
         toggle = "defensives",
 
@@ -1385,7 +1386,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135984,
+        texture = "Interface\\Icons\\spell_holy_unyieldingfaith",
 
         handler = function ()
             applyDebuff( "target", "hand_of_reckoning" )
@@ -1404,7 +1405,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135966,
+        texture = "Interface\\Icons\\spell_holy_sealofsacrifice",
 
         toggle = "defensives",
 
@@ -1425,7 +1426,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135967,
+        texture = "Interface\\Icons\\spell_holy_sealofsalvation",
 
         toggle = "defensives",
 
@@ -1446,7 +1447,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135920,
+        texture = "Interface\\Icons\\spell_holy_holybolt",
 
         handler = function ()
             removeBuff( "divine_favor" )
@@ -1470,7 +1471,7 @@ spec:RegisterAbilities( {
 
         talent = "holy_shield",
         startsCombat = false,
-        texture = 135880,
+        texture = "Interface\\Icons\\spell_holy_blessingofprotection",
 
         handler = function ()
             applyBuff( "holy_shield" )
@@ -1492,7 +1493,7 @@ spec:RegisterAbilities( {
 
         talent = "holy_shock",
         startsCombat = true,
-        texture = 135972,
+        texture = "Interface\\Icons\\spell_holy_searinglight",
 
         handler = function ()
             removeBuff( "divine_favor" )
@@ -1511,7 +1512,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135902,
+        texture = "Interface\\Icons\\spell_holy_excorcism",
 
         handler = function ()
             if target.is_boss and ( target.is_undead or target.is_demon ) then applyDebuff( "target", "holy_wrath" ) end
@@ -1532,7 +1533,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 236258,
+        texture = "Interface\\Icons\\ability_paladin_judgementred",
 
         handler = function ()
             if talent.judgements_of_the_pure.enabled then applyBuff( "judgements_of_the_pure" ) end
@@ -1558,7 +1559,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135959,
+        texture = "Interface\\Icons\\spell_holy_righteousfury",
 
         handler = function ()
             if talent.judgements_of_the_pure.enabled then applyBuff( "judgements_of_the_pure" ) end
@@ -1584,7 +1585,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 236255,
+        texture = "Interface\\Icons\\ability_paladin_judgementblue",
 
         handler = function ()
             if talent.judgements_of_the_pure.enabled then applyBuff( "judgements_of_the_pure" ) end
@@ -1607,7 +1608,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = true,
-        texture = 135928,
+        texture = "Interface\\Icons\\spell_holy_layonhands",
 
         toggle = "defensives",
 
@@ -1633,7 +1634,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135949,
+        texture = "Interface\\Icons\\spell_holy_purify",
 
         buff = function() return buff.dispellable_disease.up and "dispellable_disease" or "dispellable_poison" end,
 
@@ -1655,7 +1656,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135955,
+        texture = "Interface\\Icons\\spell_holy_resurrection",
 
         handler = function ()
         end,
@@ -1676,7 +1677,7 @@ spec:RegisterAbilities( {
 
         talent = "repentance",
         startsCombat = false,
-        texture = 135942,
+        texture = "Interface\\Icons\\spell_holy_prayerofhealing",
 
         toggle = "defensives",
 
@@ -1697,7 +1698,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135873,
+        texture = "Interface\\Icons\\spell_holy_auraoflight",
 
         nobuff = "retribution_aura",
 
@@ -1716,7 +1717,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = true,
-        texture = 135068,
+        texture = "Interface\\Icons\\inv_shoulder_37",
 
         handler = function ()
         end,
@@ -1731,7 +1732,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135962,
+        texture = "Interface\\Icons\\spell_holy_sealoffury",
 
         nobuff = "righteous_fury",
 
@@ -1752,7 +1753,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 236249,
+        texture = "Interface\\Icons\\ability_paladin_blessedmending",
         nobuff = "sacred_shield",
 
         handler = function ()
@@ -1773,7 +1774,7 @@ spec:RegisterAbilities( {
 
         talent = "seal_of_command",
         startsCombat = false,
-        texture = 132347,
+        texture = "Interface\\Icons\\ability_warrior_innerrage",
 
         handler = function ()
             removeBuff( "seal" )
@@ -1793,7 +1794,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135971,
+        texture = "Interface\\Icons\\spell_holy_sealofwrath",
 
         handler = function ()
             removeBuff( "seal" )
@@ -1813,7 +1814,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135917,
+        texture = "Interface\\Icons\\spell_holy_healingaura",
 
         handler = function ()
             removeBuff( "seal" )
@@ -1833,7 +1834,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132325,
+        texture = "Interface\\Icons\\ability_thunderbolt",
 
         handler = function ()
             removeBuff( "seal" )
@@ -1853,7 +1854,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135969,
+        texture = "Interface\\Icons\\spell_holy_sealofvengeance",
 
         handler = function ()
             removeBuff( "seal" )
@@ -1871,7 +1872,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135969,
+        texture = "Interface\\Icons\\spell_holy_sealofvengeance",
 
         handler = function ()
             removeBuff( "seal" )
@@ -1891,7 +1892,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135960,
+        texture = "Interface\\Icons\\spell_holy_righteousnessaura",
 
         handler = function ()
             removeBuff( "seal" )
@@ -1908,7 +1909,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135974,
+        texture = "Interface\\Icons\\spell_holy_senseundead",
 
         handler = function ()
             if buff.sense_undead.up then removeBuff( "sense_undead" )
@@ -1925,7 +1926,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 136192,
+        texture = "Interface\\Icons\\spell_shadow_sealofkings",
 
         nobuff = "shadow_resistance_aura",
 
@@ -1947,7 +1948,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 236265,
+        texture = "Interface\\Icons\\ability_paladin_shieldofvengeance",
         clash = 0.4,
 
         equipped = "shield",
@@ -1970,7 +1971,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135983,
+        texture = "Interface\\Icons\\spell_holy_turnundead",
 
         usable = function() return target.is_undead or target.is_demon, "target must be undead or demon" end,
 

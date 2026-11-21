@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'DEATHKNIGHT' then return end
 
 local addon, ns = ...
@@ -940,7 +941,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = false,
-        texture = 136120,
+        texture = "Interface\\Icons\\spell_shadow_antimagicshell",
 
         toggle = "defensives",
 
@@ -962,7 +963,7 @@ spec:RegisterAbilities( {
 
         talent = "antimagic_zone",
         startsCombat = false,
-        texture = 237510,
+        texture = "Interface\\Icons\\spell_deathknight_antimagiczone",
 
         toggle = "defensives",
 
@@ -990,7 +991,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 237511,
+        texture = "Interface\\Icons\\spell_deathknight_armyofthedead",
 
         toggle = "cooldowns",
 
@@ -1016,7 +1017,7 @@ spec:RegisterAbilities( {
         spendType = "blood_runes",
 
         startsCombat = true,
-        texture = 237513,
+        texture = "Interface\\Icons\\spell_deathknight_bloodboil",
 
         handler = function ()
         end,
@@ -1036,7 +1037,7 @@ spec:RegisterAbilities( {
         spendType = "blood_runes",
 
         startsCombat = false,
-        texture = 135770,
+        texture = "Interface\\Icons\\spell_deathknight_bloodpresence",
 
         nobuff = "blood_presence",
 
@@ -1061,7 +1062,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 135772,
+        texture = "Interface\\Icons\\spell_deathknight_deathstrike",
 
         handler = function ()
             if talent.reaping.rank == 3 then
@@ -1086,7 +1087,7 @@ spec:RegisterAbilities( {
         spendType = "health",
 
         startsCombat = true,
-        texture = 237515,
+        texture = "Interface\\Icons\\spell_deathknight_bloodtap",
 
         handler = function ()
             gain( 1, "blood_runes" )
@@ -1110,7 +1111,7 @@ spec:RegisterAbilities( {
 
         talent = "bone_shield",
         startsCombat = false,
-        texture = 132728,
+        texture = "Interface\\Icons\\inv_chest_leather_13",
 
         toggle = "defensives",
 
@@ -1134,7 +1135,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 135834,
+        texture = "Interface\\Icons\\spell_frost_chainsofice",
 
         handler = function ()
             applyDebuff( "target", "frost_fever" )
@@ -1155,7 +1156,7 @@ spec:RegisterAbilities( {
 
         talent = "corpse_explosion",
         startsCombat = false,
-        texture = 132099,
+        texture = "Interface\\Icons\\ability_creature_disease_02",
 
         -- TODO:  Determine if I can rely on the UI for usability of Corpse Explosion.
 
@@ -1176,7 +1177,7 @@ spec:RegisterAbilities( {
 
         talent = "dancing_rune_weapon",
         startsCombat = false,
-        texture = 135277,
+        texture = "Interface\\Icons\\inv_sword_07",
 
         toggle = "cooldowns",
 
@@ -1197,7 +1198,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 136088,
+        texture = "Interface\\Icons\\spell_nature_shamanrage",
 
         handler = function ()
             applyDebuff( "target", "dark_command" )
@@ -1223,7 +1224,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = false,
-        texture = 136144,
+        texture = "Interface\\Icons\\spell_shadow_deathanddecay",
 
         handler = function ()
             applyBuff( "death_and_decay" )
@@ -1244,7 +1245,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = true,
-        texture = 136145,
+        texture = "Interface\\Icons\\spell_shadow_deathcoil",
 
         handler = function ()
             if talent.unholy_blight.enabled then applyDebuff( "target", "unholy_blight" ) end
@@ -1265,7 +1266,7 @@ spec:RegisterAbilities( {
         spendType = "unholy_runes",
 
         startsCombat = false,
-        texture = 135766,
+        texture = "Interface\\Icons\\spell_arcane_teleportundercity",
 
         toggle = "cooldowns",
 
@@ -1282,7 +1283,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = true,
-        texture = 237532,
+        texture = "Interface\\Icons\\spell_deathknight_strangulate",
 
         toggle = "interrupts",
 
@@ -1303,7 +1304,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = false,
-        texture = 136146,
+        texture = "Interface\\Icons\\spell_shadow_deathpact",
 
         toggle = "cooldowns",
 
@@ -1330,7 +1331,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 237517,
+        texture = "Interface\\Icons\\spell_deathknight_butcher2",
 
         healing = function()
             local base = ( 0.05 + ( 0.0125 * talent.improved_death_strike.rank ) ) * health.max
@@ -1357,7 +1358,7 @@ spec:RegisterAbilities( {
 
         talent = "deathchill",
         startsCombat = false,
-        texture = 136213,
+        texture = "Interface\\Icons\\spell_shadow_soulleech_2",
 
         toggle = "cooldowns",
 
@@ -1378,7 +1379,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = false,
-        texture = 135372,
+        texture = "Interface\\Icons\\inv_sword_62",
 
         toggle = "cooldowns",
 
@@ -1401,7 +1402,7 @@ spec:RegisterAbilities( {
         spendType = "frost_runes",
 
         startsCombat = false,
-        texture = 135773,
+        texture = "Interface\\Icons\\spell_deathknight_frostpresence",
 
         nobuff = "frost_presence",
 
@@ -1424,7 +1425,7 @@ spec:RegisterAbilities( {
 
         talent = "frost_strike",
         startsCombat = true,
-        texture = 237520,
+        texture = "Interface\\Icons\\spell_deathknight_empowerruneblade2",
 
         handler = function ()
             removeStack( "killing_machine" )
@@ -1448,7 +1449,7 @@ spec:RegisterAbilities( {
 
         talent = "ghoul_frenzy",
         startsCombat = false,
-        texture = 132152,
+        texture = "Interface\\Icons\\ability_ghoulfrenzy",
 
         usable = function()
             if pet.ghoul.down then return false, "requires a living ghoul" end
@@ -1476,7 +1477,7 @@ spec:RegisterAbilities( {
 
         talent = "heart_strike",
         startsCombat = true,
-        texture = 135675,
+        texture = "Interface\\Icons\\inv_weapon_shortblade_40",
 
         handler = function ()
             if glyph.heart_strike.enabled then applyDebuff( "target", "glyph_of_heart_strike" ) end
@@ -1495,7 +1496,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = false,
-        texture = 134228,
+        texture = "Interface\\Icons\\inv_misc_horn_02",
 
         handler = function ()
             applyBuff( "horn_of_winter" )
@@ -1526,7 +1527,7 @@ spec:RegisterAbilities( {
 
         talent = "howling_blast",
         startsCombat = true,
-        texture = 135833,
+        texture = "Interface\\Icons\\spell_frost_arcticwinds",
 
         handler = function ()
             removeBuff( "deathchill" )
@@ -1553,7 +1554,7 @@ spec:RegisterAbilities( {
 
         talent = "hungering_cold",
         startsCombat = true,
-        texture = 135152,
+        texture = "Interface\\Icons\\inv_staff_15",
 
         toggle = "cooldowns",
 
@@ -1575,7 +1576,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = false,
-        texture = 237525,
+        texture = "Interface\\Icons\\spell_deathknight_iceboundfortitude",
 
         toggle = "defensives",
 
@@ -1599,7 +1600,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 237526,
+        texture = "Interface\\Icons\\spell_deathknight_icetouch",
 
         handler = function ()
             removeStack( "killing_machine" )
@@ -1620,7 +1621,7 @@ spec:RegisterAbilities( {
 
         talent = "lichborne",
         startsCombat = true,
-        texture = 136187,
+        texture = "Interface\\Icons\\spell_shadow_raisedead",
 
         toggle = "defensives",
 
@@ -1642,7 +1643,7 @@ spec:RegisterAbilities( {
 
         talent = "mark_of_blood",
         startsCombat = true,
-        texture = 132205,
+        texture = "Interface\\Icons\\ability_hunter_rapidkilling",
 
         toggle = "defensives",
 
@@ -1663,7 +1664,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = true,
-        texture = 237527,
+        texture = "Interface\\Icons\\spell_deathknight_mindfreeze",
 
         timeToReady = state.timeToInterrupt,
         debuff = "casting",
@@ -1692,7 +1693,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 135771,
+        texture = "Interface\\Icons\\spell_deathknight_classicon",
 
         handler = function ()
             removeBuff( "deathchill" )
@@ -1718,7 +1719,7 @@ spec:RegisterAbilities( {
         spendType = "frost_runes",
 
         startsCombat = false,
-        texture = 237528,
+        texture = "Interface\\Icons\\spell_deathknight_pathoffrost",
 
         handler = function ()
             applyBuff( "path_of_frost" )
@@ -1740,7 +1741,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 136182,
+        texture = "Interface\\Icons\\spell_shadow_plaguecloud",
 
         handler = function ()
             if dot.frost_fever.ticking then
@@ -1774,7 +1775,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 237519,
+        texture = "Interface\\Icons\\spell_deathknight_empowerruneblade",
 
         handler = function ()
             applyDebuff( "target", "blood_plague" )
@@ -1793,7 +1794,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 136143,
+        texture = "Interface\\Icons\\spell_shadow_deadofnight",
 
         handler = function ()
         end,
@@ -1810,7 +1811,7 @@ spec:RegisterAbilities( {
         essential = true,
 
         startsCombat = false,
-        texture = 136119,
+        texture = "Interface\\Icons\\spell_shadow_animatedead",
 
         item = function()
             if glyph.raise_dead.enabled then return end
@@ -1845,7 +1846,7 @@ spec:RegisterAbilities( {
         spendType = "runic_power",
 
         startsCombat = true,
-        texture = 237518,
+        texture = "Interface\\Icons\\spell_deathknight_darkconviction",
 
         buff = "rune_strike_usable",
         nobuff = "rune_strike",
@@ -1868,7 +1869,7 @@ spec:RegisterAbilities( {
 
         talent = "rune_tap",
         startsCombat = true,
-        texture = 237529,
+        texture = "Interface\\Icons\\spell_deathknight_runetap",
 
         toggle = "cooldowns",
 
@@ -1895,7 +1896,7 @@ spec:RegisterAbilities( {
 
         talent = "scourge_strike",
         startsCombat = true,
-        texture = 237530,
+        texture = "Interface\\Icons\\spell_deathknight_scourgestrike",
 
         handler = function ()
             -- TODO: talent.desecration effect?
@@ -1917,7 +1918,7 @@ spec:RegisterAbilities( {
         gainType = "runic_power",
 
         startsCombat = true,
-        texture = 136214,
+        texture = "Interface\\Icons\\spell_shadow_soulleech_3",
 
         toggle = "interrupts",
 
@@ -1941,7 +1942,7 @@ spec:RegisterAbilities( {
 
         talent = "summon_gargoyle",
         startsCombat = false,
-        texture = 132182,
+        texture = "Interface\\Icons\\ability_hunter_pet_bat",
 
         toggle = "cooldowns",
 
@@ -1967,7 +1968,7 @@ spec:RegisterAbilities( {
 
         talent = "unbreakable_armor",
         startsCombat = false,
-        texture = 132388,
+        texture = "Interface\\Icons\\inv_armor_helm_plate_naxxramas_raidwarrior_c_01",
 
         toggle = "cooldowns",
 
@@ -1986,7 +1987,7 @@ spec:RegisterAbilities( {
 
         talent = "unholy_frenzy",
         startsCombat = false,
-        texture = 237512,
+        texture = "Interface\\Icons\\spell_deathknight_bladedarmor",
 
         toggle = "cooldowns",
 
@@ -2007,7 +2008,7 @@ spec:RegisterAbilities( {
         spendType = "unholy_runes",
 
         startsCombat = false,
-        texture = 135775,
+        texture = "Interface\\Icons\\spell_deathknight_unholypresence",
 
         nobuff = "unholy_presence",
 
@@ -2033,7 +2034,7 @@ spec:RegisterAbilities( {
 
         talent = "vampiric_blood",
         startsCombat = true,
-        texture = 136168,
+        texture = "Interface\\Icons\\spell_shadow_lifedrain",
 
         toggle = "defensives",
 

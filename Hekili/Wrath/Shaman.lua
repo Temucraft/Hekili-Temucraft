@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'SHAMAN' then return end
 
 local addon, ns = ...
@@ -864,7 +865,24 @@ spec:RegisterStateExpr( "rockbiter_offhand", function () return false end )
 spec:RegisterStateExpr( "mainhand_imbued", function () return false end )
 spec:RegisterStateExpr( "offhand_imbued", function () return false end )
 
-local GetWeaponEnchantInfo = _G.GetWeaponEnchantInfo
+local GetWeaponEnchantInfo = GetWeaponEnchantInfo -- Temucraft: the port version (imbue names)
+
+-- Temucraft: 3.3.5 names the imbue on the weapon tooltip ("Windfury 3"); match it to the first word of the imbue
+-- spells' names (Windfury Weapon, Flametongue Weapon...).
+local imbueWords
+local function imbueByName( name )
+    if type( name ) ~= "string" then return nil end
+    if not imbueWords then
+        imbueWords = {}
+        for key, id in pairs( { windfury = 8232, flametongue = 8024, frostbrand = 8033, rockbiter = 8017, earthliving = 51730 } ) do
+            local spell = GetSpellInfo( id )
+            local word = spell and spell:match( "^(%S+)" )
+            if word then imbueWords[ word:lower() ] = key end
+        end
+    end
+    local word = name:match( "^(%S+)" )
+    return word and imbueWords[ word:lower() ]
+end
 
 local enchant_ids = {
     [283]  = "windfury",
@@ -964,7 +982,7 @@ spec:RegisterHook( "reset_precast", function()
     if mh then
         mainhand_imbued = true
 
-        mh = enchant_ids[ mh ]
+        mh = enchant_ids[ mh_id ] or imbueByName( mh_id ) -- Temucraft: upstream read the wrong value; 3.3.5 gives a name
 
         if mh == "windfury" then windfury_mainhand = true
         elseif mh == "flametongue" then flametongue_mainhand = true
@@ -975,7 +993,7 @@ spec:RegisterHook( "reset_precast", function()
     if oh then
         offhand_imbued = true
 
-        oh = enchant_ids[ oh ]
+        oh = enchant_ids[ oh_id ] or imbueByName( oh_id )
 
         if oh == "windfury" then windfury_offhand = true
         elseif oh == "flametongue" then flametongue_offhand = true
@@ -1003,7 +1021,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136077,
+        texture = "Interface\\Icons\\spell_nature_regenerate",
 
         handler = function ()
         end,
@@ -1023,7 +1041,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136010,
+        texture = "Interface\\Icons\\spell_nature_astralrecal",
 
         toggle = "cooldowns",
 
@@ -1043,7 +1061,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136012,
+        texture = "Interface\\Icons\\spell_nature_bloodlust",
 
         toggle = "cooldowns",
 
@@ -1064,7 +1082,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 310731,
+        texture = "Interface\\Icons\\spell_shaman_dropall_02",
 
         handler = function ()
             for i = 138, 141 do
@@ -1087,7 +1105,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 310730,
+        texture = "Interface\\Icons\\spell_shaman_dropall_01",
 
         handler = function ()
             for i = 134, 137 do
@@ -1110,7 +1128,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 310732,
+        texture = "Interface\\Icons\\spell_shaman_dropall_03",
 
         handler = function ()
             for i = 142, 145 do
@@ -1136,7 +1154,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136042,
+        texture = "Interface\\Icons\\spell_nature_healingwavegreater",
 
         handler = function ()
             removeBuff( "riptide" )
@@ -1162,7 +1180,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136015,
+        texture = "Interface\\Icons\\spell_nature_chainlightning",
 
         handler = function ()
             removeBuff( "elemental_mastery" )
@@ -1186,7 +1204,7 @@ spec:RegisterAbilities( {
 
         talent = "cleanse_spirit",
         startsCombat = false,
-        texture = 236288,
+        texture = "Interface\\Icons\\ability_shaman_cleansespirit",
 
         buff = "can_cleanse_spirit",
 
@@ -1207,7 +1225,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136019,
+        texture = "Interface\\Icons\\spell_nature_diseasecleansingtotem",
 
         totem = "water",
 
@@ -1229,7 +1247,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136067,
+        texture = "Interface\\Icons\\spell_nature_nullifypoison",
 
         buff = "can_cleanse_toxins",
 
@@ -1250,7 +1268,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136024,
+        texture = "Interface\\Icons\\spell_nature_earthelemental_totem",
 
         toggle = "cooldowns",
 
@@ -1276,7 +1294,7 @@ spec:RegisterAbilities( {
 
         talent = "earth_shield",
         startsCombat = false,
-        texture = 136089,
+        texture = "Interface\\Icons\\spell_nature_skinofearth",
 
         handler = function ()
             removeBuff( "shield" )
@@ -1299,7 +1317,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136026,
+        texture = "Interface\\Icons\\spell_nature_earthshock",
 
         handler = function ()
             applyDebuff( "target", "earth_shock" )
@@ -1323,7 +1341,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136102,
+        texture = "Interface\\Icons\\spell_nature_strengthofearthtotem02",
 
         totem = "earth",
 
@@ -1346,7 +1364,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 237575,
+        texture = "Interface\\Icons\\spell_shaman_earthlivingweapon",
 
         usable = function() return ( equipped.mainhand and not mainhand_imbued ) or ( equipped.offhand and not offhand_imbued ), "must have an unimbued weapon" end,
 
@@ -1373,7 +1391,7 @@ spec:RegisterAbilities( {
 
         talent = "elemental_mastery",
         startsCombat = false,
-        texture = 136115,
+        texture = "Interface\\Icons\\spell_nature_wispheal",
 
         toggle = "cooldowns",
 
@@ -1396,7 +1414,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136034,
+        texture = "Interface\\Icons\\spell_nature_farsight",
 
         handler = function ()
             applyBuff( "far_sight" )
@@ -1416,7 +1434,7 @@ spec:RegisterAbilities( {
 
         talent = "feral_spirit",
         startsCombat = false,
-        texture = 237577,
+        texture = "Interface\\Icons\\spell_shaman_feralspirit",
 
         toggle = "cooldowns",
 
@@ -1437,7 +1455,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135790,
+        texture = "Interface\\Icons\\spell_fire_elemental_totem",
 
         toggle = "cooldowns",
 
@@ -1462,7 +1480,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135824,
+        texture = "Interface\\Icons\\spell_fire_sealoffire",
 
         buff = "fire_totem",
 
@@ -1484,7 +1502,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135832,
+        texture = "Interface\\Icons\\spell_fireresistancetotem_01",
 
         totem = "water",
 
@@ -1511,7 +1529,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135813,
+        texture = "Interface\\Icons\\spell_fire_flameshock",
 
         handler = function ()
             applyDebuff( "target", "flame_shock" )
@@ -1534,7 +1552,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136040,
+        texture = "Interface\\Icons\\spell_nature_guardianward",
 
         totem = "fire",
 
@@ -1560,7 +1578,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135814,
+        texture = "Interface\\Icons\\spell_fire_flametounge",
 
         usable = function() return ( equipped.mainhand and not mainhand_imbued ) or ( equipped.offhand and not offhand_imbued ), "must have an unimbued weapon" end,
 
@@ -1589,7 +1607,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135866,
+        texture = "Interface\\Icons\\spell_frostresistancetotem_01",
 
         totem = "fire",
 
@@ -1616,7 +1634,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135849,
+        texture = "Interface\\Icons\\spell_frost_frostshock",
 
         handler = function ()
             applyDebuff( "target", "frost_shock" )
@@ -1639,7 +1657,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135847,
+        texture = "Interface\\Icons\\spell_frost_frostbrand",
 
         usable = function() return ( equipped.mainhand and not mainhand_imbued ) or ( equipped.offhand and not offhand_imbued ), "must have an unimbued weapon" end,
 
@@ -1668,7 +1686,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136095,
+        texture = "Interface\\Icons\\spell_nature_spiritwolf",
 
         handler = function ()
             applyBuff( "ghost_wolf" )
@@ -1687,7 +1705,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136039,
+        texture = "Interface\\Icons\\spell_nature_groundingtotem",
 
         totem = "air",
 
@@ -1710,7 +1728,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135127,
+        texture = "Interface\\Icons\\inv_spear_04",
 
         totem = "water",
 
@@ -1738,7 +1756,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136052,
+        texture = "Interface\\Icons\\spell_nature_magicimmunity",
 
         handler = function ()
             removeBuff( "natures_swiftness" )
@@ -1759,7 +1777,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 237579,
+        texture = "Interface\\Icons\\spell_shaman_hex",
 
         handler = function ()
             applyDebuff( "target", "hex" )
@@ -1781,7 +1799,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 237582,
+        texture = "Interface\\Icons\\spell_shaman_lavaburst",
 
         handler = function ()
             removeBuff( "elemental_mastery" )
@@ -1803,7 +1821,7 @@ spec:RegisterAbilities( {
 
         talent = "lava_lash",
         startsCombat = true,
-        texture = 236289,
+        texture = "Interface\\Icons\\ability_shaman_lavalash",
 
         handler = function ()
         end,
@@ -1824,7 +1842,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136043,
+        texture = "Interface\\Icons\\spell_nature_healingwavelesser",
 
         handler = function ()
             removeBuff( "natures_swiftness" )
@@ -1850,7 +1868,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136048,
+        texture = "Interface\\Icons\\spell_nature_lightning",
 
         handler = function ()
             removeStack( "clearcasting" )
@@ -1872,7 +1890,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 136051,
+        texture = "Interface\\Icons\\spell_nature_lightningshield",
 
         handler = function ()
             removeBuff( "shield" )
@@ -1894,7 +1912,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135826,
+        texture = "Interface\\Icons\\spell_fire_selfdestruct",
 
         totem = "fire",
 
@@ -1919,7 +1937,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136053,
+        texture = "Interface\\Icons\\spell_nature_manaregentotem",
 
         totem = "water",
 
@@ -1942,7 +1960,7 @@ spec:RegisterAbilities( {
 
         talent = "mana_tide_totem",
         startsCombat = false,
-        texture = 135861,
+        texture = "Interface\\Icons\\spell_frost_summonwaterelemental",
 
         toggle = "cooldowns",
 
@@ -1967,7 +1985,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136061,
+        texture = "Interface\\Icons\\spell_nature_natureresistancetotem",
 
         totem = "air",
 
@@ -1990,7 +2008,7 @@ spec:RegisterAbilities( {
 
         talent = "natures_swiftness",
         startsCombat = false,
-        texture = 136076,
+        texture = "Interface\\Icons\\spell_nature_ravenform",
 
         toggle = "cooldowns",
 
@@ -2012,7 +2030,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136075,
+        texture = "Interface\\Icons\\spell_nature_purge",
 
         debuff = "dispellable_magic",
 
@@ -2036,7 +2054,7 @@ spec:RegisterAbilities( {
 
         talent = "riptide",
         startsCombat = false,
-        texture = 252995,
+        texture = "Interface\\Icons\\spell_nature_riptide",
 
         handler = function ()
             applyBuff( "riptide" )
@@ -2055,7 +2073,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136086,
+        texture = "Interface\\Icons\\spell_nature_rockbiter",
 
         usable = function() return ( equipped.mainhand and not mainhand_imbued ) or ( equipped.offhand and not offhand_imbued ), "must have an unimbued weapon" end,
 
@@ -2084,7 +2102,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135825,
+        texture = "Interface\\Icons\\spell_fire_searingtotem",
 
         totem = "fire",
 
@@ -2109,7 +2127,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136082,
+        texture = "Interface\\Icons\\spell_nature_removecurse",
 
         totem = "air",
 
@@ -2131,7 +2149,7 @@ spec:RegisterAbilities( {
 
         talent = "shamanistic_rage",
         startsCombat = false,
-        texture = 136088,
+        texture = "Interface\\Icons\\spell_nature_shamanrage",
 
         -- Shamanistic Rage is on Defensives toggle unless mana is below the threshold and not wearing Tier10
         toggle = function ()
@@ -2155,7 +2173,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136097,
+        texture = "Interface\\Icons\\spell_nature_stoneclawtotem",
 
         totem = "earth",
 
@@ -2180,7 +2198,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136098,
+        texture = "Interface\\Icons\\spell_nature_stoneskintotem",
 
         totem = "earth",
 
@@ -2206,7 +2224,7 @@ spec:RegisterAbilities( {
 
         talent = "stormstrike",
         startsCombat = true,
-        texture = 132314,
+        texture = "Interface\\Icons\\ability_shaman_stormstrike",
 
         handler = function ()
             applyDebuff( "target", "stormstrike", nil, 4 )
@@ -2225,7 +2243,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136023,
+        texture = "Interface\\Icons\\spell_nature_earthbindtotem",
 
         totem = "earth",
 
@@ -2248,7 +2266,7 @@ spec:RegisterAbilities( {
 
         talent = "thunderstorm",
         startsCombat = true,
-        texture = 237589,
+        texture = "Interface\\Icons\\spell_shaman_thunderstorm",
 
         handler = function ()
             gain( 0.08 * mana.max, "mana" )
@@ -2265,7 +2283,7 @@ spec:RegisterAbilities( {
 
         talent = "tidal_force",
         startsCombat = false,
-        texture = 135845,
+        texture = "Interface\\Icons\\spell_frost_frostbolt",
 
         toggle = "cooldowns",
 
@@ -2287,7 +2305,7 @@ spec:RegisterAbilities( {
 
         talent = "totem_of_wrath",
         startsCombat = false,
-        texture = 135829,
+        texture = "Interface\\Icons\\spell_fire_totemofwrath",
 
         totem = "fire",
 
@@ -2307,7 +2325,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 310733,
+        texture = "Interface\\Icons\\spell_shaman_totemrecall",
 
         handler = function ()
             if buff.earth_totem.up then
@@ -2341,7 +2359,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136108,
+        texture = "Interface\\Icons\\spell_nature_tremortotem",
 
         totem = "earth",
 
@@ -2364,7 +2382,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136148,
+        texture = "Interface\\Icons\\spell_shadow_demonbreath",
 
         handler = function ()
             applyBuff( "water_breathing" )
@@ -2380,7 +2398,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 132315,
+        texture = "Interface\\Icons\\ability_shaman_watershield",
 
         handler = function ()
             removeBuff( "shield" )
@@ -2402,7 +2420,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135863,
+        texture = "Interface\\Icons\\spell_frost_windwalkon",
 
         handler = function ()
             applyBuff( "water_walking" )
@@ -2421,7 +2439,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136018,
+        texture = "Interface\\Icons\\spell_nature_cyclone",
 
         toggle = "interrupts",
         debuff = "casting",
@@ -2444,7 +2462,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136114,
+        texture = "Interface\\Icons\\spell_nature_windfury",
 
         totem = "air",
 
@@ -2467,7 +2485,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136018,
+        texture = "Interface\\Icons\\spell_nature_cyclone",
 
         usable = function() return ( equipped.mainhand and not mainhand_imbued ) or ( equipped.offhand and not offhand_imbued ), "must have an unimbued weapon" end,
 
@@ -2496,7 +2514,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136092,
+        texture = "Interface\\Icons\\spell_nature_slowingtotem",
 
         totem = "air",
 

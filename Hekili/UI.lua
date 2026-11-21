@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- UI.lua
 -- Dynamic UI Elements
 
@@ -20,8 +21,8 @@ local round = ns.round
 
 local format, insert = string.format, table.insert
 
-local GetSpecialization = _G.GetSpecialization or function() return GetActiveTalentGroup() end
-local GetSpecializationInfo = _G.GetSpecializationInfo or function()
+local GetSpecialization = GetSpecialization or function() return GetActiveTalentGroup() end
+local GetSpecializationInfo = GetSpecializationInfo or function()
     local name, baseName, id = UnitClass( "player" )
     return id, baseName, name
 end
@@ -215,7 +216,7 @@ function ns.StartConfiguration( external )
             v.Backdrop = v.Backdrop or CreateFrame( "Frame", v:GetName().. "_Backdrop", UIParent, "BackdropTemplate" )
             v.Backdrop:ClearAllPoints()
 
-            if not v:IsAnchoringRestricted() then
+            if not ( v.IsAnchoringRestricted and v:IsAnchoringRestricted() ) --[[ Temucraft: newer method ]] then
                 v:EnableMouse( true )
                 v:SetMovable( true )
 
@@ -345,7 +346,7 @@ function ns.StopConfiguration()
 
     for id, display in pairs( Hekili.DisplayPool ) do
         display:EnableMouse( false )
-        if not display:IsAnchoringRestricted() then display:SetMovable( true ) end
+        if not ( display.IsAnchoringRestricted and display:IsAnchoringRestricted() ) --[[ Temucraft: newer method ]] then display:SetMovable( true ) end
 
         -- v:SetBackdrop( nil )
         if display.Header then
@@ -701,26 +702,12 @@ do
                                         notCheckable = true,
                                         hidden = function () return Hekili.State.spec.id ~= i end,
                                     }
-                                    local cn = "HekiliSpec" .. i .. "Option" .. n
-                                    local cf = CreateFrame( "Frame", cn, UIParent, "HekiliPopupDropdownRangeTemplate" )
+                                    -- Temucraft: the 3.3.5 dropdown has no custom frames (the retail slider entry), so the
+                                    -- value list below (upstream's older version) is used instead.
+                                    submenu.hasArrow = true
+                                    submenu.menuList = {}
 
-                                    cf.Slider:SetAccessorFunction( function()
-                                        menu.args[1] = setting.name
-                                        return setting.info.get( menu.args )
-                                    end )
-
-                                    cf.Slider:SetMutatorFunction( function( val )
-                                        menu.args[1] = setting.name
-                                        return setting.info.set( menu.args, val )
-                                    end )
-
-                                    cf.Slider:SetMinMaxValues( setting.info.softMin or setting.info.min or 0, setting.info.softMax or setting.info.max or 10 )
-                                    cf.Slider:SetValueStep( setting.info.step or 1 )
-                                    cf.Slider:SetObeyStepOnDrag( true )
-
-                                    submenu.customFrame = cf
-
-                                    --[[ local low, high, step = setting.info.min, setting.info.max, setting.info.step
+                                    local low, high, step = setting.info.min or setting.info.softMin or 0, setting.info.max or setting.info.softMax or 10, setting.info.step or 1
                                     local fractional, factor = step < 1, 1 / step
 
                                     if fractional then
@@ -758,7 +745,7 @@ do
                                             end,
                                             hidden = function () return Hekili.State.spec.id ~= i end,
                                         } )
-                                    end ]]
+                                    end
 
                                     insert( menuData, submenu )
                                 end
@@ -1014,7 +1001,7 @@ do
         d:SetFrameStrata( conf.frameStrata or "MEDIUM" )
         d:SetFrameLevel( conf.frameLevel or ( 10 * d.index ) )
 
-        if not d:IsAnchoringRestricted() then
+        if not ( d.IsAnchoringRestricted and d:IsAnchoringRestricted() ) --[[ Temucraft: newer method ]] then
             d:SetClampedToScreen( true )
             d:EnableMouse( false )
             d:SetMovable( true )
@@ -1325,7 +1312,7 @@ do
 
                                     local rStart, rDuration
                                     if a.item then
-                                        rStart, rDuration = _G.C_Container.GetItemCooldown( a.item )
+                                        rStart, rDuration = GetItemCooldown( a.item )
                                     else
                                         rStart, rDuration = GetSpellCooldown( a.id )
                                     end
@@ -1526,7 +1513,7 @@ do
 
                         local rStart, rDuration = 0, 0
                         if a.item then
-                            rStart, rDuration = _G.C_Container.GetItemCooldown( a.item )
+                            rStart, rDuration = GetItemCooldown( a.item )
                         else
                             if a.cooldown > 0 or a.spendType ~= "runes" then
                                 rStart, rDuration = GetSpellCooldown( a.id )
@@ -1663,7 +1650,7 @@ do
                     local start, duration, enabled, modRate = 0, 0, 1, 1
 
                     if ability.item then
-                        start, duration, enabled, modRate = _G.C_Container.GetItemCooldown( ability.item )
+                        start, duration, enabled, modRate = GetItemCooldown( ability.item )
                     else
                         start, duration, enabled, modRate = GetSpellCooldown( ability.id )
                     end

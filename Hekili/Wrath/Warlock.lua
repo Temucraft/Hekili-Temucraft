@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'WARLOCK' then return end
 
 local addon, ns = ...
@@ -764,7 +765,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136135,
+        texture = "Interface\\Icons\\spell_shadow_cripple",
 
         handler = function( rank )
             applyDebuff( "target", "banish" )
@@ -785,7 +786,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 136088,
+        texture = "Interface\\Icons\\spell_nature_shamanrage",
 
         buff = "metamorphosis",
 
@@ -809,7 +810,7 @@ spec:RegisterAbilities( {
 
         talent = "chaos_bolt",
         startsCombat = true,
-        texture = 236291,
+        texture = "Interface\\Icons\\ability_warlock_chaosbolt",
 
         handler = function ()
         end,
@@ -828,7 +829,7 @@ spec:RegisterAbilities( {
 
         talent = "conflagrate",
         startsCombat = true,
-        texture = 135807,
+        texture = "Interface\\Icons\\spell_fire_fireball",
 
         debuff = function()
             return debuff.immolate.up and "immolate" or "shadowflame"
@@ -856,7 +857,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136118,
+        texture = "Interface\\Icons\\spell_shadow_abominationexplosion",
 
 		cycle = "corruption",
 
@@ -882,7 +883,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132386,
+        texture = "Interface\\Icons\\inv_ammo_firetar",
 
         handler = function ()
         end,
@@ -904,7 +905,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135230,
+        texture = "Interface\\Icons\\inv_stone_04",
 
         handler = function ()
         end,
@@ -926,7 +927,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136210,
+        texture = "Interface\\Icons\\spell_shadow_soulgem",
 
         handler = function ()
         end,
@@ -948,7 +949,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 134131,
+        texture = "Interface\\Icons\\inv_misc_gem_sapphire_01",
 
         handler = function ()
         end,
@@ -968,7 +969,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136139,
+        texture = "Interface\\Icons\\spell_shadow_curseofsargeras",
 
         handler = function ()
             applyDebuff( "target", "curse_of_agony" )
@@ -989,7 +990,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136122,
+        texture = "Interface\\Icons\\spell_shadow_auraofdarkness",
 
         usable = function() return target.time_to_die > 65, "target must survive long enough for curse_of_doom to expire" end,
 
@@ -1013,7 +1014,7 @@ spec:RegisterAbilities( {
 
         talent = "curse_of_exhaustion",
         startsCombat = true,
-        texture = 136162,
+        texture = "Interface\\Icons\\spell_shadow_grimward",
 
         handler = function ()
             applyDebuff( "target", "curse_of_exhaustion" )
@@ -1032,7 +1033,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136130,
+        texture = "Interface\\Icons\\spell_shadow_chilltouch",
 
         handler = function ()
             applyDebuff( "target", "curse_of_the_elements" )
@@ -1053,7 +1054,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136140,
+        texture = "Interface\\Icons\\spell_shadow_curseoftounges",
 
         handler = function ()
             applyDebuff( "target", "curse_of_tongues" )
@@ -1074,7 +1075,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136138,
+        texture = "Interface\\Icons\\spell_shadow_curseofmannoroth",
 
         handler = function ()
             applyBuff( "curse_of_weakness" )
@@ -1094,7 +1095,7 @@ spec:RegisterAbilities( {
 
         talent = "dark_pact",
         startsCombat = false,
-        texture = 136141,
+        texture = "Interface\\Icons\\spell_shadow_darkritual",
 
         pet_cost = {
             [18220] = 305,
@@ -1125,7 +1126,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136145,
+        texture = "Interface\\Icons\\spell_shadow_deathcoil",
 
         toggle = "defensives",
 
@@ -1148,7 +1149,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136185,
+        texture = "Interface\\Icons\\spell_shadow_ragingscream",
         essential = true,
 
         handler = function ()
@@ -1167,7 +1168,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = true,
-        texture = 132368,
+        texture = "Interface\\Icons\\ability_warstomp",
 
         buff = "metamorphosis",
 
@@ -1190,7 +1191,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136185,
+        texture = "Interface\\Icons\\spell_shadow_ragingscream",
         essential = true,
 
         handler = function ()
@@ -1212,7 +1213,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 237559,
+        texture = "Interface\\Icons\\spell_shadow_demoniccirclesummon",
 
         handler = function ()
         end,
@@ -1230,7 +1231,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 237560,
+        texture = "Interface\\Icons\\spell_shadow_demoniccircleteleport",
 
         handler = function ()
         end,
@@ -1249,7 +1250,7 @@ spec:RegisterAbilities( {
 
         talent = "demonic_empowerment",
         startsCombat = false,
-        texture = 236292,
+        texture = "Interface\\Icons\\ability_warlock_demonicempowerment",
 
         toggle = "cooldowns",
 
@@ -1272,7 +1273,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136153,
+        texture = "Interface\\Icons\\spell_shadow_detectlesserinvisibility",
 
         handler = function ()
             applyBuff( "detect_invisibility" )
@@ -1291,7 +1292,7 @@ spec:RegisterAbilities( {
         spend = function() return mod_suppression( 0.17 ) end,
         spendType = "mana",
         startsCombat = true,
-        texture = 136169,
+        texture = "Interface\\Icons\\spell_shadow_lifedrain02",
         aura = "drain_life",
 		tick_time = function () return class.auras.drain_life.tick_time end,
         start = function( rank )
@@ -1322,7 +1323,7 @@ spec:RegisterAbilities( {
         spend = function() return mod_suppression( 0.17 ) end,
         spendType = "mana",
         startsCombat = true,
-        texture = 136208,
+        texture = "Interface\\Icons\\spell_shadow_siphonmana",
         aura = "drain_mana",
 		tick_time = function () return class.auras.drain_mana.tick_time end,
         start = function( rank )
@@ -1349,7 +1350,7 @@ spec:RegisterAbilities( {
         spend = function() return mod_suppression( 0.14 ) end,
         spendType = "mana",
         startsCombat = true,
-        texture = 136163,
+        texture = "Interface\\Icons\\spell_shadow_haunting",
         aura = "drain_soul",
 		tick_time = function () return class.auras.drain_soul.tick_time end,
         start = function( rank )
@@ -1380,7 +1381,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136155,
+        texture = "Interface\\Icons\\spell_shadow_evileye",
 
         handler = function ()
             applyBuff( "eye_of_kilrogg" )
@@ -1401,7 +1402,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136183,
+        texture = "Interface\\Icons\\spell_shadow_possession",
 
         handler = function()
             applyDebuff( "target", "fear" )
@@ -1422,7 +1423,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136156,
+        texture = "Interface\\Icons\\spell_shadow_felarmour",
         essential = true,
 
         handler = function ()
@@ -1442,7 +1443,7 @@ spec:RegisterAbilities( {
 
         talent = "fel_domination",
         startsCombat = false,
-        texture = 136082,
+        texture = "Interface\\Icons\\spell_nature_removecurse",
 
         usable = function() return not pet.alive, "not used with an active pet" end,
 
@@ -1470,7 +1471,7 @@ spec:RegisterAbilities( {
 
         talent = "haunt",
         startsCombat = true,
-        texture = 236298,
+        texture = "Interface\\Icons\\ability_warlock_haunt",
 
         handler = function ()
             applyDebuff( "target", "haunt" )
@@ -1505,7 +1506,7 @@ spec:RegisterAbilities( {
         },
 
         startsCombat = false,
-        texture = 136168,
+        texture = "Interface\\Icons\\spell_shadow_lifedrain",
         aura = "health_funnel",
 
         start = function( rank )
@@ -1527,7 +1528,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135818,
+        texture = "Interface\\Icons\\spell_fire_incinerate",
 
         aura = "hellfire",
 
@@ -1550,7 +1551,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136147,
+        texture = "Interface\\Icons\\spell_shadow_deathscream",
 
         handler = function( rank )
             applyDebuff( "target", "howl_of_terror" )
@@ -1571,7 +1572,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135817,
+        texture = "Interface\\Icons\\spell_fire_immolation",
 		cycle = "immolate",
 
         handler = function()
@@ -1595,7 +1596,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135818,
+        texture = "Interface\\Icons\\spell_fire_incinerate",
 
         buff = "metamorphosis",
 
@@ -1619,7 +1620,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135789,
+        texture = "Interface\\Icons\\spell_fire_burnout",
 
         handler = function ()
             removeBuff( "backlash" )
@@ -1652,7 +1653,7 @@ spec:RegisterAbilities( {
         spendType = "health",
 
         startsCombat = false,
-        texture = 136126,
+        texture = "Interface\\Icons\\spell_shadow_burningspirit",
 
         handler = function ()
             local amt = 2000
@@ -1685,7 +1686,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 237558,
+        texture = "Interface\\Icons\\spell_shadow_demonform",
 
         toggle = "cooldowns",
 
@@ -1706,7 +1707,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136186,
+        texture = "Interface\\Icons\\spell_shadow_rainoffire",
 
         aura = "rain_of_fire",
 
@@ -1729,7 +1730,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136194,
+        texture = "Interface\\Icons\\spell_shadow_shadesofdarkness",
 
         handler = function ()
         end,
@@ -1749,7 +1750,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136223,
+        texture = "Interface\\Icons\\spell_shadow_twilight",
 
         handler = function ()
         end,
@@ -1767,7 +1768,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135827,
+        texture = "Interface\\Icons\\spell_fire_soulburn",
 
         handler = function ()
             removeStack( "backdraft" )
@@ -1790,7 +1791,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136193,
+        texture = "Interface\\Icons\\spell_shadow_seedofdestruction",
 
         cycle = "seed_of_corruption",
 
@@ -1810,7 +1811,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = true,
-        texture = 136172,
+        texture = "Interface\\Icons\\spell_shadow_metamorphosis",
 
         handler = function ()
         end,
@@ -1832,7 +1833,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136197,
+        texture = "Interface\\Icons\\spell_shadow_shadowbolt",
 
 		cycle = "shadow_bolt",
 
@@ -1866,7 +1867,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132332,
+        texture = "Interface\\Icons\\ability_warlock_avoidance",
 
         buff = "metamorphosis",
         nobuff = "shadow_cleave",
@@ -1890,7 +1891,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136121,
+        texture = "Interface\\Icons\\spell_shadow_antishadow",
 
         handler = function ()
             applyBuff( "shadow_ward" )
@@ -1912,7 +1913,7 @@ spec:RegisterAbilities( {
 
         talent = "shadowburn",
         startsCombat = true,
-        texture = 136191,
+        texture = "Interface\\Icons\\spell_shadow_scourgebuild",
 
         usable = function() return soul_shards > 0, "requires a soul_shard" end,
 
@@ -1936,7 +1937,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 236302,
+        texture = "Interface\\Icons\\ability_warlock_shadowflame",
 		cycle = "shadowflame",
         handler = function ()
             applyDebuff( "target", "shadowflame" )
@@ -1958,7 +1959,7 @@ spec:RegisterAbilities( {
 
         talent = "shadowfury",
         startsCombat = true,
-        texture = 136201,
+        texture = "Interface\\Icons\\spell_shadow_shadowfury",
 
         handler = function ()
             applyDebuff( "target", "shadowfury" )
@@ -1977,7 +1978,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135808,
+        texture = "Interface\\Icons\\spell_fire_fireball02",
 
         usable = function() return buff.decimation.up or soul_shards > 0, "requires decimation or a soul_shard" end,
 
@@ -2005,7 +2006,7 @@ spec:RegisterAbilities( {
 
         talent = "soul_link",
         startsCombat = false,
-        texture = 136160,
+        texture = "Interface\\Icons\\spell_shadow_gathershadows",
 
         nobuff = "soul_link",
 
@@ -2028,7 +2029,7 @@ spec:RegisterAbilities( {
         spendType = "health",
 
         startsCombat = true,
-        texture = 135728,
+        texture = "Interface\\Icons\\spell_arcane_arcane01",
 
         usable = function() return soul_shards > 0, "requires a soul_shard" end,
 
@@ -2049,7 +2050,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136154,
+        texture = "Interface\\Icons\\spell_shadow_enslavedemon",
 
         usable = function() return not pet.exists, "cannot have a pet" end,
 
@@ -2074,7 +2075,7 @@ spec:RegisterAbilities( {
 
         talent = "summon_felguard",
         startsCombat = false,
-        texture = 136216,
+        texture = "Interface\\Icons\\spell_shadow_summonfelguard",
         essential = true,
 
         usable = function() return soul_shards > 0, "requires a soul_shard" end,
@@ -2100,7 +2101,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 		toggle = "cooldown",
         startsCombat = false,
-        texture = 136219,
+        texture = "Interface\\Icons\\spell_shadow_summoninfernal",
         essential = true,
 
         handler = function()
@@ -2125,7 +2126,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136217,
+        texture = "Interface\\Icons\\spell_shadow_summonfelhunter",
         essential = true,
 
         usable = function() return soul_shards > 0, "requires a soul_shard" end,
@@ -2154,7 +2155,7 @@ spec:RegisterAbilities( {
         essential = true,
 
         startsCombat = false,
-        texture = 136218,
+        texture = "Interface\\Icons\\spell_shadow_summonimp",
 
         handler = function()
             summonPet( "imp" )
@@ -2178,7 +2179,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 4352492,
+        texture = nil, -- Temucraft: icon 4352492 is not in the 3.3.5 client; the spell icon is used
         essential = true,
 
         handler = function()
@@ -2204,7 +2205,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136220,
+        texture = "Interface\\Icons\\spell_shadow_summonsuccubus",
         essential = true,
 
         handler = function()
@@ -2230,7 +2231,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136221,
+        texture = "Interface\\Icons\\spell_shadow_summonvoidwalker",
         essential = true,
 
         usable = function() return soul_shards > 0, "requires a soul_shard" end,
@@ -2258,7 +2259,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136148,
+        texture = "Interface\\Icons\\spell_shadow_demonbreath",
 
         handler = function ()
             applyBuff( "unending_breath" )
@@ -2280,7 +2281,7 @@ spec:RegisterAbilities( {
 
         talent = "unstable_affliction",
         startsCombat = true,
-        texture = 136228,
+        texture = "Interface\\Icons\\spell_shadow_unstableaffliction_3",
 
 		cycle = "unstable_affliction",
         handler = function ()

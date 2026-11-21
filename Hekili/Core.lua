@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Hekili.lua
 -- April 2014
 
@@ -24,8 +25,8 @@ local trim = string.trim
 local tcopy = ns.tableCopy
 local tinsert, tremove, twipe = table.insert, table.remove, table.wipe
 
-local GetSpecialization = _G.GetSpecialization or function() return GetActiveTalentGroup() end
-local GetSpecializationInfo = _G.GetSpecializationInfo or function()
+local GetSpecialization = GetSpecialization or function() return GetActiveTalentGroup() end
+local GetSpecializationInfo = GetSpecializationInfo or function()
     local name, baseName, id = UnitClass( "player" )
     return id, baseName, name
 end

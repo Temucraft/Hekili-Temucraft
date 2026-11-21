@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'PRIEST' then return end
 
 local addon, ns = ...
@@ -575,7 +576,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136066,
+        texture = "Interface\\Icons\\spell_nature_nullifydisease",
 
         handler = function ()
         end,
@@ -593,7 +594,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135883,
+        texture = "Interface\\Icons\\spell_holy_blindingheal",
 
         handler = function ()
         end,
@@ -614,7 +615,7 @@ spec:RegisterAbilities( {
 
         talent = "circle_of_healing",
         startsCombat = false,
-        texture = 135887,
+        texture = "Interface\\Icons\\spell_holy_circleofrenewal",
 
         handler = function ()
         end,
@@ -632,7 +633,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135935,
+        texture = "Interface\\Icons\\spell_holy_nullifydisease",
 
         handler = function ()
         end,
@@ -651,7 +652,7 @@ spec:RegisterAbilities( {
 
         talent = "desperate_prayer",
         startsCombat = false,
-        texture = 135954,
+        texture = "Interface\\Icons\\spell_holy_restoration",
 
         toggle = "cooldowns",
 
@@ -671,7 +672,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 252997,
+        texture = "Interface\\Icons\\spell_shadow_devouringplague",
 
         handler = function ()
             if talent.shadow_weaving.rank == 3 then
@@ -695,7 +696,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135894,
+        texture = "Interface\\Icons\\spell_holy_dispelmagic",
         buff = "dispellable_magic",
 
         handler = function ()
@@ -716,7 +717,7 @@ spec:RegisterAbilities( {
 
         talent = "dispersion",
         startsCombat = false,
-        texture = 237563,
+        texture = "Interface\\Icons\\spell_shadow_dispersion",
 
         toggle = "cooldowns",
 
@@ -736,7 +737,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 237540,
+        texture = "Interface\\Icons\\spell_holy_divinehymn",
 
         toggle = "cooldowns",
 
@@ -756,7 +757,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135898,
+        texture = "Interface\\Icons\\spell_holy_divinespirit",
 
         handler = function ()
             applyBuff( "divine_spirit" )
@@ -777,7 +778,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135994,
+        texture = "Interface\\Icons\\spell_magic_lesserinvisibilty",
 
         handler = function ()
         end,
@@ -795,7 +796,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135902,
+        texture = "Interface\\Icons\\spell_holy_excorcism",
 
         toggle = "cooldowns",
 
@@ -815,7 +816,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135907,
+        texture = "Interface\\Icons\\spell_holy_flashheal",
 
         handler = function ()
         end,
@@ -835,7 +836,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135913,
+        texture = "Interface\\Icons\\spell_holy_greaterheal",
 
         handler = function ()
         end,
@@ -856,7 +857,7 @@ spec:RegisterAbilities( {
 
         talent = "guardian_spirit",
         startsCombat = false,
-        texture = 237542,
+        texture = "Interface\\Icons\\spell_holy_guardianspirit",
 
         toggle = "cooldowns",
 
@@ -876,7 +877,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135915,
+        texture = "Interface\\Icons\\spell_holy_heal",
 
         handler = function ()
         end,
@@ -896,7 +897,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135972,
+        texture = "Interface\\Icons\\spell_holy_searinglight",
 
         handler = function ()
         end,
@@ -916,7 +917,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135922,
+        texture = "Interface\\Icons\\spell_holy_holynova",
 
         handler = function ()
         end,
@@ -934,7 +935,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 135982,
+        texture = "Interface\\Icons\\spell_holy_symbolofhope",
 
         toggle = "cooldowns",
 
@@ -954,7 +955,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135926,
+        texture = "Interface\\Icons\\spell_holy_innerfire",
 
         handler = function ()
             applyBuff( "inner_fire", nil, 20 + ( talent.inner_fire.rank * 4 ) )
@@ -973,7 +974,7 @@ spec:RegisterAbilities( {
 
         talent = "inner_focus",
         startsCombat = false,
-        texture = 135863,
+        texture = "Interface\\Icons\\spell_frost_windwalkon",
 
         toggle = "cooldowns",
 
@@ -994,7 +995,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135929,
+        texture = "Interface\\Icons\\spell_holy_lesserheal",
 
         handler = function ()
         end,
@@ -1014,7 +1015,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135928,
+        texture = "Interface\\Icons\\spell_holy_layonhands",
 
         handler = function ()
             -- TODO: glyph.levitate.enabled removes reagent requirement.
@@ -1034,7 +1035,7 @@ spec:RegisterAbilities( {
 
         talent = "lightwell",
         startsCombat = false,
-        texture = 135980,
+        texture = "Interface\\Icons\\spell_holy_summonlightwell",
 
         toggle = "cooldowns",
 
@@ -1054,7 +1055,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136170,
+        texture = "Interface\\Icons\\spell_shadow_manaburn",
 
         handler = function ()
         end,
@@ -1072,7 +1073,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135739,
+        texture = "Interface\\Icons\\spell_arcane_massdispel",
 
         handler = function ()
         end,
@@ -1090,7 +1091,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136224,
+        texture = "Interface\\Icons\\spell_shadow_unholyfrenzy",
 
         handler = function ()
         end,
@@ -1110,7 +1111,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136206,
+        texture = "Interface\\Icons\\spell_shadow_shadowworddominate",
 
         handler = function ()
         end,
@@ -1131,7 +1132,7 @@ spec:RegisterAbilities( {
 
         talent = "mind_flay",
         startsCombat = true,
-        texture = 136208,
+        texture = "Interface\\Icons\\spell_shadow_siphonmana",
 
         aura = "mind_flay",
         tick_time = function () return class.auras.mind_flay.tick_time end,
@@ -1173,7 +1174,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 237565,
+        texture = "Interface\\Icons\\spell_shadow_mindshear",
 
         aura = "mind_sear",
         tick_time = function () return class.auras.mind_sear.tick_time end,
@@ -1210,7 +1211,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135933,
+        texture = "Interface\\Icons\\spell_holy_mindsooth",
 
         handler = function ()
         end,
@@ -1228,7 +1229,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135934,
+        texture = "Interface\\Icons\\spell_holy_mindvision",
 
         handler = function ()
         end,
@@ -1249,7 +1250,7 @@ spec:RegisterAbilities( {
 
         talent = "pain_suppression",
         startsCombat = false,
-        texture = 135936,
+        texture = "Interface\\Icons\\spell_holy_painsupression",
 
         toggle = "defensives",
 
@@ -1272,7 +1273,7 @@ spec:RegisterAbilities( {
 
         talent = "penance",
         startsCombat = true,
-        texture = 237545,
+        texture = "Interface\\Icons\\spell_holy_penance",
 
         start = function ()
             applyDebuff( "target", "penance" )
@@ -1292,7 +1293,7 @@ spec:RegisterAbilities( {
 
         talent = "power_infusion",
         startsCombat = false,
-        texture = 135939,
+        texture = "Interface\\Icons\\spell_holy_powerinfusion",
 
         toggle = "cooldowns",
 
@@ -1313,7 +1314,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135987,
+        texture = "Interface\\Icons\\spell_holy_wordfortitude",
 
         handler = function ()
             applyBuff( "power_word_fortitude" )
@@ -1334,7 +1335,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135940,
+        texture = "Interface\\Icons\\spell_holy_powerwordshield",
 
         handler = function ()
             -- if glyph.power_word_shield.enabled then health.current = min( health.max, health.current + some_amount_of_healing ) end
@@ -1357,7 +1358,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135941,
+        texture = "Interface\\Icons\\spell_holy_prayeroffortitude",
 
         handler = function ()
             applyBuff( "prayer_of_fortitude" )
@@ -1378,7 +1379,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135943,
+        texture = "Interface\\Icons\\spell_holy_prayerofhealing02",
 
         handler = function ()
         end,
@@ -1398,7 +1399,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135944,
+        texture = "Interface\\Icons\\spell_holy_prayerofmendingtga",
 
         handler = function ()
         end,
@@ -1418,7 +1419,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135945,
+        texture = "Interface\\Icons\\spell_holy_prayerofshadowprotection",
 
         handler = function ()
             applyBuff( "prayer_of_shadow_protection" )
@@ -1439,7 +1440,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135946,
+        texture = "Interface\\Icons\\spell_holy_prayerofspirit",
 
         handler = function ()
             applyBuff( "prayer_of_spirit" )
@@ -1461,7 +1462,7 @@ spec:RegisterAbilities( {
 
         talent = "psychic_horror",
         startsCombat = true,
-        texture = 237568,
+        texture = "Interface\\Icons\\spell_shadow_psychichorrors",
 
         toggle = "interrupts",
 
@@ -1481,7 +1482,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136184,
+        texture = "Interface\\Icons\\spell_shadow_psychicscream",
         toggle = "interrupts",
 
         handler = function ()
@@ -1502,7 +1503,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135953,
+        texture = "Interface\\Icons\\spell_holy_renew",
 
         handler = function ()
         end,
@@ -1522,7 +1523,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135955,
+        texture = "Interface\\Icons\\spell_holy_resurrection",
 
         handler = function ()
         end,
@@ -1542,7 +1543,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136091,
+        texture = "Interface\\Icons\\spell_nature_slow",
         toggle = "interrupts",
 
         handler = function ()
@@ -1563,7 +1564,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136199,
+        texture = "Interface\\Icons\\spell_shadow_shadowfiend",
         toggle = "cooldowns",
 
         handler = function ()
@@ -1585,7 +1586,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 136121,
+        texture = "Interface\\Icons\\spell_shadow_antishadow",
 
         handler = function ()
             applyBuff( "shadow_protection" )
@@ -1606,7 +1607,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136149,
+        texture = "Interface\\Icons\\spell_shadow_demonicfortitude",
 
         handler = function ()
         end,
@@ -1626,7 +1627,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136207,
+        texture = "Interface\\Icons\\spell_shadow_shadowwordpain",
 
         handler = function ()
             applyDebuff( "target", "shadow_word_pain" )
@@ -1648,7 +1649,7 @@ spec:RegisterAbilities( {
 
         talent = "shadowform",
         startsCombat = false,
-        texture = 136200,
+        texture = "Interface\\Icons\\spell_shadow_shadowform",
 
         handler = function ()
             applyBuff( "shadowform" )
@@ -1668,7 +1669,7 @@ spec:RegisterAbilities( {
 
         talent = "silence",
         startsCombat = true,
-        texture = 136164,
+        texture = "Interface\\Icons\\spell_shadow_impphaseshift",
         toggle = "interrupts",
 
         readyTime = state.timeToInterrupt,
@@ -1691,7 +1692,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135924,
+        texture = "Interface\\Icons\\spell_holy_holysmite",
 
         handler = function ()
         end,
@@ -1709,7 +1710,7 @@ spec:RegisterAbilities( {
 
         talent = "vampiric_embrace",
         startsCombat = false,
-        texture = 136230,
+        texture = "Interface\\Icons\\spell_shadow_unsummonbuilding",
         essential = true,
 
         handler = function ()
@@ -1730,7 +1731,7 @@ spec:RegisterAbilities( {
 
         talent = "vampiric_touch",
         startsCombat = true,
-        texture = 135978,
+        texture = "Interface\\Icons\\spell_holy_stoicism",
 
         handler = function ()
             if talent.shadow_weaving.rank == 3 then

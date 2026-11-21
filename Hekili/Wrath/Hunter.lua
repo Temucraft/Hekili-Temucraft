@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'HUNTER' then return end
 
 local addon, ns = ...
@@ -890,7 +891,7 @@ spec:RegisterAbilities( {
 
         talent = "aimed_shot",
         startsCombat = true,
-        texture = 135130,
+        texture = "Interface\\Icons\\inv_spear_07",
 
         handler = function ()
             applyDebuff( "target", "aimed_shot" )
@@ -913,7 +914,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132218,
+        texture = "Interface\\Icons\\ability_impalingbolt",
 
         handler = function ()
             if glyph.arcane_shot.enabled and ( debuff.viper_sting.up or debuff.scorpid_sting.up or debuff.serpent_sting.up ) then
@@ -936,7 +937,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132252,
+        texture = "Interface\\Icons\\ability_mount_pinktiger",
 
         nobuff = "aspect_of_the_beast",
 
@@ -955,7 +956,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132242,
+        texture = "Interface\\Icons\\ability_mount_jungletiger",
 
         nobuff = "aspect_of_the_cheetah",
 
@@ -974,7 +975,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132188,
+        texture = "Interface\\Icons\\ability_hunter_pet_dragonhawk",
 
         nobuff = "aspect_of_the_dragonhawk",
 
@@ -995,7 +996,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 136076,
+        texture = "Interface\\Icons\\spell_nature_ravenform",
 
         nobuff = "aspect_of_the_hawk",
 
@@ -1016,7 +1017,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132159,
+        texture = "Interface\\Icons\\ability_hunter_aspectofthemonkey",
 
         nobuff = "aspect_of_the_monkey",
 
@@ -1035,7 +1036,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132267,
+        texture = "Interface\\Icons\\ability_mount_whitetiger",
 
         nobuff = "aspect_of_the_pack",
 
@@ -1054,7 +1055,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132160,
+        texture = "Interface\\Icons\\ability_hunter_aspectoftheviper",
 
         nobuff = "aspect_of_the_viper",
 
@@ -1073,7 +1074,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 136074,
+        texture = "Interface\\Icons\\spell_nature_protectionformnature",
 
         nobuff = "aspect_of_the_wild",
 
@@ -1093,7 +1094,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false, -- it kinda doesn't.
-        -- texture = 132369,
+        -- texture = "Interface\\Icons\\ability_whirlwind",
 
         nobuff = "auto_shot",
 
@@ -1114,7 +1115,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132270,
+        texture = "Interface\\Icons\\ability_physical_taunt",
 
         handler = function ()
             applyDebuff( "target", "beast_lore" )
@@ -1134,7 +1135,7 @@ spec:RegisterAbilities( {
 
         talent = "bestial_wrath",
         startsCombat = false,
-        texture = 132127,
+        texture = "Interface\\Icons\\ability_druid_ferociousbite",
 
         toggle = "cooldowns",
 
@@ -1157,7 +1158,7 @@ spec:RegisterAbilities( {
 
         talent = "black_arrow",
         startsCombat = true,
-        texture = 136181,
+        texture = "Interface\\Icons\\spell_shadow_painspike",
 
         handler = function ()
             applyDebuff( "target", "black_arrow" )
@@ -1176,7 +1177,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 132161,
+        texture = "Interface\\Icons\\ability_hunter_beastcall",
 
         handler = function ()
             summonPet( "pet" )
@@ -1192,7 +1193,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 132599,
+        texture = "Interface\\Icons\\inv_box_petcarrier_01",
 
         usable = function() return time == 0, "cannot use in combat" end,
 
@@ -1214,7 +1215,7 @@ spec:RegisterAbilities( {
 
         talent = "chimera_shot",
         startsCombat = true,
-        texture = 236176,
+        texture = "Interface\\Icons\\ability_hunter_chimerashot2",
 
         handler = function ()
             if dot.serpent_sting.ticking then dot.serpent_sting.expires = query_time + class.auras.serpent_sting.duration
@@ -1244,7 +1245,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135860,
+        texture = "Interface\\Icons\\spell_frost_stun",
 
         handler = function ()
             applyDebuff( "target", "concussive_shot" )
@@ -1264,7 +1265,7 @@ spec:RegisterAbilities( {
 
         talent = "counterattack",
         startsCombat = true,
-        texture = 132336,
+        texture = "Interface\\Icons\\ability_warrior_challange",
 
         buff = "counterattack_usable",
 
@@ -1285,7 +1286,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132369,
+        texture = "Interface\\Icons\\ability_whirlwind",
 
         toggle = "defensives",
 
@@ -1306,7 +1307,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132294,
+        texture = "Interface\\Icons\\ability_rogue_feint",
 
         handler = function ()
             setDistance( 20 + target.distance )
@@ -1322,7 +1323,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = false,
-        texture = 136095,
+        texture = "Interface\\Icons\\spell_nature_spiritwolf",
 
         handler = function ()
             dismissPet()
@@ -1341,7 +1342,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135736,
+        texture = "Interface\\Icons\\spell_arcane_blink",
 
         handler = function ()
             applyDebuff( "target", "distracting_shot" )
@@ -1361,7 +1362,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132172,
+        texture = "Interface\\Icons\\ability_hunter_eagleeye",
 
         handler = function ()
             applyBuff( "eagle_eye" )
@@ -1381,7 +1382,7 @@ spec:RegisterAbilities( {
 
         talent = "explosive_shot",
         startsCombat = true,
-        texture = 236178,
+        texture = "Interface\\Icons\\ability_hunter_explosiveshot",
         velocity = 40,
 
         caption = function()
@@ -1412,7 +1413,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135826,
+        texture = "Interface\\Icons\\spell_fire_selfdestruct",
 
         handler = function ()
             cool_traps()
@@ -1433,7 +1434,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132150,
+        texture = "Interface\\Icons\\ability_eyeoftheowl",
 
         handler = function ()
             applyBuff( "eyes_of_the_beast" )
@@ -1449,7 +1450,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132165,
+        texture = "Interface\\Icons\\ability_hunter_beasttraining",
 
         handler = function ()
         end,
@@ -1468,7 +1469,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132293,
+        texture = "Interface\\Icons\\ability_rogue_feigndeath",
 
         handler = function ()
             applyBuff( "feign_death" )
@@ -1487,7 +1488,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135815,
+        texture = "Interface\\Icons\\spell_fire_flare",
 
         handler = function ()
         end,
@@ -1505,7 +1506,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135837,
+        texture = "Interface\\Icons\\spell_frost_chillingbolt",
 
         handler = function ()
             cool_traps()
@@ -1524,7 +1525,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135834,
+        texture = "Interface\\Icons\\spell_frost_chainsofice",
 
         handler = function ()
             cool_traps()
@@ -1545,7 +1546,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135840,
+        texture = "Interface\\Icons\\spell_frost_freezingbreath",
 
         handler = function ()
             cool_traps()
@@ -1564,7 +1565,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132212,
+        texture = "Interface\\Icons\\ability_hunter_snipershot",
 
         handler = function ()
             applyDebuff( "target", "hunters_mark" )
@@ -1585,7 +1586,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 135813,
+        texture = "Interface\\Icons\\spell_fire_flameshock",
 
         handler = function ()
             cool_traps()
@@ -1607,7 +1608,7 @@ spec:RegisterAbilities( {
 
         talent = "intimidation",
         startsCombat = true,
-        texture = 132111,
+        texture = "Interface\\Icons\\ability_devour",
 
         toggle = "interrupts",
 
@@ -1631,7 +1632,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132176,
+        texture = "Interface\\Icons\\ability_hunter_killcommand",
 
         usable = function() return pet.active, "requires a pet" end,
 
@@ -1652,7 +1653,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 236174,
+        texture = "Interface\\Icons\\ability_hunter_assassinate2",
 
         usable = function() return target.health.pct < 20, "enemy health must be below 20 percent" end,
 
@@ -1674,7 +1675,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 236189,
+        texture = "Interface\\Icons\\ability_hunter_masterscall",
 
         toggle = "interrupts",
 
@@ -1697,7 +1698,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132179,
+        texture = "Interface\\Icons\\ability_hunter_mendpet",
 
         usable = function() return pet.active, "requires an active pet" end,
 
@@ -1720,7 +1721,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132180,
+        texture = "Interface\\Icons\\ability_hunter_misdirection",
 
         usable = function() return pet.active or group, "requires an active pet or a group" end,
 
@@ -1741,7 +1742,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132215,
+        texture = "Interface\\Icons\\ability_hunter_swiftstrike",
 
         buff = "mongoose_bite_usable",
 
@@ -1766,7 +1767,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132330,
+        texture = "Interface\\Icons\\ability_upgrademoonglaive",
 
         handler = function ()
             if talent.concussive_barrage.enabled then applyDebuff( "target", "concussive_barrage" ) end
@@ -1787,7 +1788,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132208,
+        texture = "Interface\\Icons\\ability_hunter_runningshot",
 
         toggle = "cooldowns",
 
@@ -1808,7 +1809,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132223,
+        texture = "Interface\\Icons\\ability_meleedamage",
 
         handler = function ()
             if glyph.raptor_strike.enabled then applyBuff( "raptor_strike" ) end
@@ -1827,7 +1828,7 @@ spec:RegisterAbilities( {
 
         talent = "readiness",
         startsCombat = false,
-        texture = 132206,
+        texture = "Interface\\Icons\\ability_hunter_readiness",
 
         toggle = "cooldowns",
 
@@ -1852,7 +1853,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132163,
+        texture = "Interface\\Icons\\ability_hunter_beastsoothe",
 
         handler = function ()
             summonPet( "pet" )
@@ -1871,7 +1872,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132118,
+        texture = "Interface\\Icons\\ability_druid_cower",
 
         usable = function() return target.is_beast, "requires beast target" end,
 
@@ -1895,7 +1896,7 @@ spec:RegisterAbilities( {
 
         talent = "scatter_shot",
         startsCombat = true,
-        texture = 132153,
+        texture = "Interface\\Icons\\ability_golemstormbolt",
 
         handler = function ()
             applyDebuff( "target", "scatter_shot" )
@@ -1914,7 +1915,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132169,
+        texture = "Interface\\Icons\\ability_hunter_criticalshot",
 
         handler = function ()
             removeDebuff( "target", "stings" )
@@ -1934,7 +1935,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132204,
+        texture = "Interface\\Icons\\ability_hunter_quickshot",
 
         handler = function ()
             removeDebuff( "target", "stings" )
@@ -1957,7 +1958,7 @@ spec:RegisterAbilities( {
 
         talent = "silencing_shot",
         startsCombat = true,
-        texture = 132323,
+        texture = "Interface\\Icons\\ability_theblackarrow",
 
         handler = function ()
             interrupt()
@@ -1976,7 +1977,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = false,
-        texture = 132211,
+        texture = "Interface\\Icons\\ability_hunter_snaketrap",
 
         handler = function ()
             cool_traps()
@@ -1995,7 +1996,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132213,
+        texture = "Interface\\Icons\\ability_hunter_steadyshot",
 
         handler = function ()
         end,
@@ -2016,7 +2017,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132164,
+        texture = "Interface\\Icons\\ability_hunter_beasttaming",
 
         usable = function() return not pet.active, "cannot have a pet" end,
 
@@ -2034,7 +2035,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132328,
+        texture = "Interface\\Icons\\ability_tracking",
 
         nobuff = "track_beasts",
 
@@ -2053,7 +2054,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 136217,
+        texture = "Interface\\Icons\\spell_shadow_summonfelhunter",
 
         nobuff = "track_demons",
 
@@ -2072,7 +2073,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 134153,
+        texture = "Interface\\Icons\\inv_misc_head_dragon_01",
 
         handler = function ()
             removeBuff( "track" )
@@ -2089,7 +2090,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 135861,
+        texture = "Interface\\Icons\\spell_frost_summonwaterelemental",
 
         nobuff = "track_elementals",
 
@@ -2108,7 +2109,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132275,
+        texture = "Interface\\Icons\\ability_racial_avatar",
 
         nobuff = "track_giants",
 
@@ -2127,7 +2128,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132320,
+        texture = "Interface\\Icons\\ability_stealth",
 
         nobuff = "track_hidden",
 
@@ -2146,7 +2147,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 135942,
+        texture = "Interface\\Icons\\spell_holy_prayerofhealing",
 
         nobuff = "track_humanoids",
 
@@ -2165,7 +2166,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 136142,
+        texture = "Interface\\Icons\\spell_shadow_darksummoning",
 
         nobuff = "track_undead",
 
@@ -2187,7 +2188,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136020,
+        texture = "Interface\\Icons\\spell_nature_drowsy",
 
         debuff = function()
             return debuff.dispellable_enrage.up and "dispellable_enrage" or "dispellable_magic"
@@ -2209,7 +2210,7 @@ spec:RegisterAbilities( {
 
         talent = "trueshot_aura",
         startsCombat = false,
-        texture = 132329,
+        texture = "Interface\\Icons\\ability_trueshot",
 
         nobuff = "trueshot_aura",
 
@@ -2230,7 +2231,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132157,
+        texture = "Interface\\Icons\\ability_hunter_aimedshot",
 
         usable = function() return UnitPowerMax( "target", Enum.PowerType.Mana ) > 0, "requires a target that has mana" end,
 
@@ -2253,7 +2254,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132222,
+        texture = "Interface\\Icons\\ability_marksmanship",
 
         handler = function ()
         end,
@@ -2272,7 +2273,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132309,
+        texture = "Interface\\Icons\\ability_rogue_trip",
 
         usable = function() return target.distance < 10, "requires melee range" end,
 
@@ -2294,7 +2295,7 @@ spec:RegisterAbilities( {
 
         talent = "wyvern_sting",
         startsCombat = true,
-        texture = 135125,
+        texture = "Interface\\Icons\\inv_spear_02",
 
         toggle = "cooldowns",
 

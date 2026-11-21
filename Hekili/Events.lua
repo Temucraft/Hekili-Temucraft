@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Events.lua
 -- June 2014
 
@@ -56,10 +57,19 @@ local function SetZoneInfo()
     state.torghast = not Hekili.IsWrath() and IsInJailersTower() or false
 end
 
+local CastArgs = HekiliTemucraft.CastArgs
+
 local function GenericOnEvent( self, event, ... )
     local eventHandlers = handlers[ event ]
 
     if not eventHandlers then return end
+
+    -- Temucraft: 3.3.5 cast events carry (unit, name, rank, ...); the handlers expect the Classic arguments.
+    local isCast, a1, a2, a3, a4 = CastArgs( event, ... )
+    if isCast then
+        for i, handler in ipairs( eventHandlers ) do handler( event, a1, a2, a3, a4 ) end
+        return
+    end
 
     for i, handler in ipairs( eventHandlers ) do
         local key = event .. "_" .. i
@@ -82,6 +92,13 @@ local function UnitSpecificOnEvent( self, event, unit, ... )
         local eventHandlers = unitFrame.events[ event ]
 
         if not eventHandlers then return end
+
+        -- Temucraft: Classic arguments for 3.3.5 cast events (see GenericOnEvent).
+        local isCast, a1, a2, a3, a4 = CastArgs( event, unit, ... )
+        if isCast then
+            for i, handler in ipairs( eventHandlers ) do handler( event, a1, a2, a3, a4 ) end
+            return
+        end
 
         for i, handler in ipairs( eventHandlers ) do
             local key = event .. "_" .. unit .. "_" .. i
@@ -1594,7 +1611,7 @@ local function CLEU_HANDLER( event, timestamp, subtype, hideCaster, sourceGUID, 
             -- Hekili:ForceUpdate( subtype )
 
         elseif ns.isMinion( destGUID ) then
-            local npcid = destGUID:match("(%d+)-%x-$")
+            local npcid = HekiliTemucraft.NpcID( destGUID )
             npcid = npcid and tonumber( npcid )
 
             if npcid == state.pet.guardian_of_azeroth.id then

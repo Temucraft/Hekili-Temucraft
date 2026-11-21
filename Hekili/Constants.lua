@@ -1,11 +1,12 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Constants.lua
 -- June 2014
 
 local addon, ns = ...
 local Hekili = _G[ addon ]
 
-local GetSpecialization = _G.GetSpecialization or function() return GetActiveTalentGroup() end
-local GetSpecializationInfo = _G.GetSpecializationInfo or function()
+local GetSpecialization = GetSpecialization or function() return GetActiveTalentGroup() end
+local GetSpecializationInfo = GetSpecializationInfo or function()
     local name, baseName, id = UnitClass( "player" )
     return id, baseName, name
 end

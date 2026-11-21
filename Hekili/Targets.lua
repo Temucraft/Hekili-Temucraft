@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Targets.lua
 -- June 2014
 
@@ -313,7 +314,7 @@ do
             if checkPets or checkPlates then
                 for unit, guid in pairs( npGUIDs ) do
                     if UnitExists( unit ) and not UnitIsDead( unit ) and UnitCanAttack( "player", unit ) and UnitInPhase( unit ) and UnitHealth( unit ) > 0 and ( UnitIsPVP( "player" ) or not UnitIsPlayer( unit ) ) then
-                        local npcid = guid:match( "(%d+)-%x-$" )
+                        local npcid = HekiliTemucraft.NpcID( guid )
                         npcid = tonumber(npcid)
 
                         local excluded = enemyExclusions[ npcid ]
@@ -361,7 +362,7 @@ do
 
                     if guid and counted[ guid ] == nil then
                         if UnitExists( unit ) and not UnitIsDead( unit ) and UnitCanAttack( "player", unit ) and UnitInPhase( unit ) and UnitHealth( unit ) > 0 and ( UnitIsPVP( "player" ) or not UnitIsPlayer( unit ) ) then
-                            local npcid = guid:match( "(%d+)-%x-$" )
+                            local npcid = HekiliTemucraft.NpcID( guid )
                             npcid = tonumber(npcid)
 
                             local excluded = enemyExclusions[ npcid ]
@@ -411,7 +412,7 @@ do
 
             for guid, seen in pairs(db) do
                 if counted[ guid ] == nil then
-                    local npcid = guid:match("(%d+)-%x-$")
+                    local npcid = HekiliTemucraft.NpcID( guid )
                     npcid = tonumber(npcid)
 
                     local excluded = enemyExclusions[ npcid ]
@@ -941,7 +942,7 @@ do
             enemy.rate = 0
             enemy.n = 0
 
-            local npcid = guid:match( "(%d+)-%x-$" )
+            local npcid = HekiliTemucraft.NpcID( guid )
             npcid = tonumber( npcid )
 
             enemy.npcid = npcid
@@ -1259,7 +1260,7 @@ do
 
         for k, v in pairs( db ) do
             local unit = ( v.unit or "unknown" )
-            local excluded = CheckEnemyExclusions( k )
+            local excluded = v.excluded -- Temucraft: upstream called an undefined function here
 
             if v.n > 3 then
                 output = output .. format( "\n    %-11s: %4ds [%d] #%6s%s %s", unit, v.deathTime, v.n, v.npcid, excluded and "*" or "", UnitName( v.unit ) or "Unknown" )

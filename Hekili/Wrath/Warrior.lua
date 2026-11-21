@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'WARRIOR' then return end
 
 local addon, ns = ...
@@ -929,7 +930,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132333,
+        texture = "Interface\\Icons\\ability_warrior_battleshout",
 
         usable = function()
             if talent.commanding_presence.rank < 5 then return not (buff.blessing_of_might.up or buff.greater_blessing_of_might.up) , "BoM might be skilled, can't overbuff" end
@@ -963,7 +964,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132349,
+        texture = "Interface\\Icons\\ability_warrior_offensivestance",
 
         nobuff = "battle_stance",
 
@@ -986,7 +987,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 136009,
+        texture = "Interface\\Icons\\spell_nature_ancestralguardian",
 
         buff = "berserker_stance",
 
@@ -1010,7 +1011,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132275,
+        texture = "Interface\\Icons\\ability_racial_avatar",
 
         nobuff = "berserker_stance",
 
@@ -1034,7 +1035,7 @@ spec:RegisterAbilities( {
 
         talent = "bladestorm",
         startsCombat = true,
-        texture = 236303,
+        texture = "Interface\\Icons\\ability_warrior_bladestorm",
 
         toggle = "cooldowns",
 
@@ -1056,7 +1057,7 @@ spec:RegisterAbilities( {
         spendType = "health",
 
         startsCombat = false,
-        texture = 132277,
+        texture = "Interface\\Icons\\ability_racial_bloodrage",
 
         toggle = "cooldowns",
 
@@ -1079,7 +1080,7 @@ spec:RegisterAbilities( {
 
         talent = "bloodthirst",
         startsCombat = true,
-        texture = 136012,
+        texture = "Interface\\Icons\\spell_nature_bloodlust",
 
         handler = function( rank )
             applyBuff( "bloodthirst", nil, 5 )
@@ -1099,7 +1100,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132091,
+        texture = "Interface\\Icons\\ability_bullrush",
 
         toggle = "defensives",
 
@@ -1120,7 +1121,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132337,
+        texture = "Interface\\Icons\\ability_warrior_charge",
 
         buff = function ()
             if talent.warbringer.enabled then return end
@@ -1149,7 +1150,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132338,
+        texture = "Interface\\Icons\\ability_warrior_cleave",
 
         nobuff = "cleave",
 
@@ -1177,7 +1178,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132351,
+        texture = "Interface\\Icons\\ability_warrior_rallyingcry",
 
         handler = function()
             if buff.my_commanding_shout.up then
@@ -1204,7 +1205,7 @@ spec:RegisterAbilities( {
 
         talent = "concussion_blow",
         startsCombat = true,
-        texture = 132325,
+        texture = "Interface\\Icons\\ability_thunderbolt",
 
         handler = function()
             applyDebuff( "target", "concussion_blow" )
@@ -1224,7 +1225,7 @@ spec:RegisterAbilities( {
 
         talent = "death_wish",
         startsCombat = true,
-        texture = 136146,
+        texture = "Interface\\Icons\\spell_shadow_deathpact",
 
         toggle = "cooldowns",
 
@@ -1246,7 +1247,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132341,
+        texture = "Interface\\Icons\\ability_warrior_defensivestance",
 
         nobuff = "defensive_stance",
 
@@ -1269,7 +1270,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132366,
+        texture = "Interface\\Icons\\ability_warrior_warcry",
 
         handler = function( rank )
             applyDebuff( "target", "demoralizing_shout" )
@@ -1290,7 +1291,7 @@ spec:RegisterAbilities( {
 
         talent = "devastate",
         startsCombat = true,
-        texture = 135291,
+        texture = "Interface\\Icons\\inv_sword_11",
 
         handler = function( rank )
             applyDebuff( "target", "sunder_armor", nil, min( 5, debuff.sunder_armor.stack + ( glyph.devastate.enabled and 2 or 1 ) ) )
@@ -1309,7 +1310,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132343,
+        texture = "Interface\\Icons\\ability_warrior_disarm",
 
         toggle = "cooldowns",
 
@@ -1332,7 +1333,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132345,
+        texture = "Interface\\Icons\\ability_warrior_focusedrage",
 
         toggle = "cooldowns",
         buff = "enrage",
@@ -1357,7 +1358,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 135358,
+        texture = "Interface\\Icons\\inv_sword_48",
 
         usable = function() return buff.sudden_death.up or target.health.pct < 20, "requires sudden_death or target health under 20 percent" end,
 
@@ -1382,7 +1383,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132316,
+        texture = "Interface\\Icons\\ability_shockwave",
 
         nobuff = "defensive_stance",
 
@@ -1404,7 +1405,7 @@ spec:RegisterAbilities( {
 
         talent = "heroic_fury",
         startsCombat = false,
-        texture = 236171,
+        texture = "Interface\\Icons\\ability_heroicleap",
 
         handler = function ()
             setCooldown( "intercept", 0 )
@@ -1427,7 +1428,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132282,
+        texture = "Interface\\Icons\\ability_rogue_ambush",
 
         nobuff = "heroic_strike",
 
@@ -1455,7 +1456,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132453,
+        texture = "Interface\\Icons\\inv_axe_66",
 
         toggle = "cooldowns",
 
@@ -1479,7 +1480,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132307,
+        texture = "Interface\\Icons\\ability_rogue_sprint",
 
         buff = function ()
             if talent.warbringer.enabled then return end
@@ -1504,7 +1505,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132365,
+        texture = "Interface\\Icons\\ability_warrior_victoryrush",
 
         buff = function ()
             if talent.warbringer.enabled then return end
@@ -1528,7 +1529,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132154,
+        texture = "Interface\\Icons\\ability_golemthunderclap",
 
         toggle = "cooldowns",
 
@@ -1547,7 +1548,7 @@ spec:RegisterAbilities( {
 
         talent = "last_stand",
         startsCombat = false,
-        texture = 135871,
+        texture = "Interface\\Icons\\spell_holy_ashestoashes",
 
         toggle = "defensives",
 
@@ -1570,7 +1571,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132350,
+        texture = "Interface\\Icons\\ability_warrior_punishingblow",
 
         toggle = "cooldowns",
 
@@ -1594,7 +1595,7 @@ spec:RegisterAbilities( {
 
         talent = "mortal_strike",
         startsCombat = true,
-        texture = 132355,
+        texture = "Interface\\Icons\\ability_warrior_savageblow",
 
         handler = function( rank )
             removeBuff( "juggernaut" )
@@ -1614,7 +1615,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132223,
+        texture = "Interface\\Icons\\ability_meleedamage",
 
         buff = "battle_stance",
 
@@ -1641,7 +1642,7 @@ spec:RegisterAbilities( {
 
         talent = "piercing_howl",
         startsCombat = true,
-        texture = 136147,
+        texture = "Interface\\Icons\\spell_shadow_deathscream",
 
         handler = function()
             applyDebuff( "target", "piercing_howl" )
@@ -1660,7 +1661,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132938,
+        texture = "Interface\\Icons\\inv_gauntlets_04",
 
         buff = "berserker_stance",
         debuff = "casting",
@@ -1683,7 +1684,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132109,
+        texture = "Interface\\Icons\\ability_criticalstrike",
 
         toggle = "cooldowns",
 
@@ -1706,7 +1707,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132155,
+        texture = "Interface\\Icons\\ability_gouge",
 
         nobuff = "berserker_stance",
 
@@ -1727,7 +1728,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132336,
+        texture = "Interface\\Icons\\ability_warrior_challange",
 
         toggle = "cooldowns",
 
@@ -1750,7 +1751,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132353,
+        texture = "Interface\\Icons\\ability_warrior_revenge",
 
         buff = function()
             if buff.revenge_usable.up then return "defensive_stance" end
@@ -1775,7 +1776,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 311430,
+        texture = "Interface\\Icons\\ability_warrior_shatteringthrow",
 
         toggle = "cooldowns",
 
@@ -1796,7 +1797,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132357,
+        texture = "Interface\\Icons\\ability_warrior_shieldbash",
 
         toggle = "interrupts",
 
@@ -1826,7 +1827,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132110,
+        texture = "Interface\\Icons\\ability_defend",
 
         buff = "defensive_stance",
 
@@ -1850,7 +1851,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 134951,
+        texture = "Interface\\Icons\\inv_shield_05",
 
         equipped = "shield",
 
@@ -1872,7 +1873,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132362,
+        texture = "Interface\\Icons\\ability_warrior_shieldwall",
 
         toggle = "defensives",
 
@@ -1896,7 +1897,7 @@ spec:RegisterAbilities( {
 
         talent = "shockwave",
         startsCombat = true,
-        texture = 236312,
+        texture = "Interface\\Icons\\ability_warrior_shockwave",
 
         handler = function ()
             applyDebuff( "target", "shockwave" )
@@ -1919,7 +1920,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132340,
+        texture = "Interface\\Icons\\ability_warrior_decisivestrike",
 
         handler = function ()
             removeBuff( "bloodsurge" )
@@ -1939,7 +1940,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = false,
-        texture = 132361,
+        texture = "Interface\\Icons\\ability_warrior_shieldreflection",
 
         toggle = "interrupts",
         debuff = "casting",
@@ -1967,7 +1968,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132363,
+        texture = "Interface\\Icons\\ability_warrior_sunder",
 
         handler = function( rank )
             applyDebuff( "target", "sunder_armor", nil, min( 5, debuff.sunder_armor.stack + 1 ) )
@@ -1987,7 +1988,7 @@ spec:RegisterAbilities( {
 
         talent = "sweeping_strikes",
         startsCombat = false,
-        texture = 132306,
+        texture = "Interface\\Icons\\ability_rogue_slicedice",
 
         nobuff = "defensive_stance",
 
@@ -2005,7 +2006,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = true,
-        texture = 136080,
+        texture = "Interface\\Icons\\spell_nature_reincarnation",
 
         buff = "defensive_stance",
 
@@ -2026,7 +2027,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 136105,
+        texture = "Interface\\Icons\\spell_nature_thunderclap",
 
         nobuff = "berserker_stance",
 
@@ -2048,7 +2049,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132342,
+        texture = "Interface\\Icons\\ability_warrior_devastate",
 
         buff = "victory_rush",
         nobuff = "defensive_stance",
@@ -2068,7 +2069,7 @@ spec:RegisterAbilities( {
 
         talent = "vigilance",
         startsCombat = false,
-        texture = 236318,
+        texture = "Interface\\Icons\\ability_warrior_vigilance",
 
         --usable = function() return active_dot.vigilance == 0, "can only have 1 active" end,
         usable = function() return FindRaidBuffByID(buff.vigilance.id) == 0, "can only have 1 active" end, -- tracking it properly is not possible without extending the function, so we just assume that there is only one Prot-Warri per Raid/Group
@@ -2090,7 +2091,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132369,
+        texture = "Interface\\Icons\\ability_whirlwind",
 
         buff = "berserker_stance",
 

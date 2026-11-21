@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- State.lua
 -- June 2014
 
@@ -29,8 +30,8 @@ local scripts = Hekili.Scripts
 
 local GetMeleeHaste = _G.GetMeleeHaste or function() return GetCombatRatingBonus( CR_HASTE_MELEE ) end
 local GetRangedHaste = _G.GetRangedHaste or function() return GetCombatRatingBonus( CR_HASTE_RANGED ) end
-local GetSpecialization = _G.GetSpecialization or function() return GetActiveTalentGroup() end
-local GetSpecializationInfo = _G.GetSpecializationInfo or function()
+local GetSpecialization = GetSpecialization or function() return GetActiveTalentGroup() end
+local GetSpecializationInfo = GetSpecializationInfo or function()
     local name, baseName, id = UnitClass( "player" )
     return id, baseName, name
 end
@@ -2525,7 +2526,7 @@ do
                     local petguid = UnitGUID( "pet" )
                     if not petguid then return false end
 
-                    local petid = tonumber( UnitGUID( "pet" ):match( "(%d+)-%x-$" ) )
+                    local petid = tonumber( HekiliTemucraft.NpcID( UnitGUID( "pet" ) ) )
                     if not petid then return false end
 
                     if petid == class.pets[ t.name ].id then
@@ -2541,7 +2542,7 @@ do
                 return not t.up
 
             elseif k == "id" then
-                return t.exists and UnitGUID( "pet" ) and tonumber( UnitGUID( "pet" ):match( "(%d+)-%x-$" ) ) or nil
+                return t.exists and UnitGUID( "pet" ) and tonumber( HekiliTemucraft.NpcID( UnitGUID( "pet" ) ) ) or nil
 
             elseif k == "spec" then
                 return t.exists and GetSpecialization( false, true )
@@ -2944,7 +2945,7 @@ do
                 end
 
                 if ability.item then
-                    GetCooldown = _G.C_Container.GetItemCooldown
+                    GetCooldown = GetItemCooldown
                     id = ability.itemCd or ability.item
                 elseif ability.funcs.cooldown_special then
                     GetCooldown = ability.funcs.cooldown_special
@@ -2988,7 +2989,7 @@ do
                     local potion = class.potions[ itemName ]
 
                     if state.toggle.potions and potion and GetItemCount( potion.item ) > 0 then
-                        start, duration = _G.C_Container.GetItemCooldown( potion.item )
+                        start, duration = GetItemCooldown( potion.item )
 
                     else
                         start = state.now

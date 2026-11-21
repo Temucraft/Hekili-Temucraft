@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Options.lua
 -- Everything related to building/configuring options.
 
@@ -36,8 +37,8 @@ local BlizzBlue = "|cFF00B4FF"
 local ClassColor = Hekili.IsWrath() and RAID_CLASS_COLORS[ class.file ] or C_ClassColor.GetClassColor( class.file )
 
 -- Simple bypass for Wrath-friendliness.
-local GetSpecialization = _G.GetSpecialization or function() return GetActiveTalentGroup() end
-local GetSpecializationInfo = _G.GetSpecializationInfo or function()
+local GetSpecialization = GetSpecialization or function() return GetActiveTalentGroup() end
+local GetSpecializationInfo = GetSpecializationInfo or function()
     local name, baseName, id = UnitClass( "player" )
     return id, baseName, name
 end
@@ -8743,7 +8744,7 @@ do
 
         elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
             if UnitIsUnit( "player", unit ) then
-                local spellID = select( 3, ... )
+                local spellID = select( 4, HekiliTemucraft.CastArgs( event, ... ) ) -- Temucraft: 3.3.5 cast arguments
                 local token = spellID and class.abilities[ spellID ] and class.abilities[ spellID ].key
 
                 local now = GetTime()

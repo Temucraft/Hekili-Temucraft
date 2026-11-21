@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'DRUID' then return end
 
 local addon, ns = ...
@@ -1446,7 +1447,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136068,
+        texture = "Interface\\Icons\\spell_nature_nullifypoison_02",
 
         handler = function ()
         end,
@@ -1464,7 +1465,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132112,
+        texture = "Interface\\Icons\\ability_druid_aquaticform",
 
         handler = function ()
             swap_form( "aquatic_form" )
@@ -1480,7 +1481,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = true,
-        texture = 136097,
+        texture = "Interface\\Icons\\spell_nature_stoneclawtotem",
 
         toggle = "cooldowns",
 
@@ -1500,7 +1501,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132114,
+        texture = "Interface\\Icons\\ability_druid_bash",
 
         toggle = "cooldowns",
 
@@ -1521,7 +1522,7 @@ spec:RegisterAbilities( {
 
         talent = "berserk",
         startsCombat = true,
-        texture = 236149,
+        texture = "Interface\\Icons\\ability_druid_berserk",
 
         toggle = "cooldowns",
 
@@ -1542,7 +1543,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132115,
+        texture = "Interface\\Icons\\ability_druid_catform",
 
         handler = function ()
             swap_form( "cat_form" )
@@ -1561,7 +1562,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132117,
+        texture = "Interface\\Icons\\ability_druid_challangingroar",
 
         toggle = "cooldowns",
 
@@ -1581,7 +1582,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132140,
+        texture = "Interface\\Icons\\ability_druid_rake",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -1601,7 +1602,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132118,
+        texture = "Interface\\Icons\\ability_druid_cower",
 
         handler = function ()
         end,
@@ -1619,7 +1620,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136067,
+        texture = "Interface\\Icons\\spell_nature_nullifypoison",
 
         handler = function ()
         end,
@@ -1637,7 +1638,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136022,
+        texture = "Interface\\Icons\\spell_nature_earthbind",
 
         handler = function ()
         end,
@@ -1655,7 +1656,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132120,
+        texture = "Interface\\Icons\\ability_druid_dash",
 
         toggle = "cooldowns",
 
@@ -1675,7 +1676,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132121,
+        texture = "Interface\\Icons\\ability_druid_demoralizingroar",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -1695,7 +1696,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132276,
+        texture = "Interface\\Icons\\ability_racial_bearform",
 
         handler = function ()
             swap_form( "dire_bear_form" )
@@ -1716,7 +1717,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132126,
+        texture = "Interface\\Icons\\ability_druid_enrage",
 
         toggle = "cooldowns",
 
@@ -1737,7 +1738,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136100,
+        texture = "Interface\\Icons\\spell_nature_stranglevines",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -1761,7 +1762,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136033,
+        texture = "Interface\\Icons\\spell_nature_faeriefire",
 
         handler = function ()
             removeDebuff( "armor_reduction" )
@@ -1781,7 +1782,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 136033,
+        texture = "Interface\\Icons\\spell_nature_faeriefire",
 
         handler = function ()
             removeDebuff( "armor_reduction" )
@@ -1804,7 +1805,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132127,
+        texture = "Interface\\Icons\\ability_druid_ferociousbite",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -1832,7 +1833,7 @@ spec:RegisterAbilities( {
 
         talent = "force_of_nature",
         startsCombat = true,
-        texture = 132129,
+        texture = "Interface\\Icons\\ability_druid_forceofnature",
 
         toggle = "cooldowns",
 
@@ -1853,7 +1854,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132091,
+        texture = "Interface\\Icons\\ability_bullrush",
 
         toggle = "cooldowns",
 
@@ -1874,7 +1875,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136038,
+        texture = "Interface\\Icons\\spell_nature_giftofthewild",
 
         handler = function ()
             applyBuff( "gift_of_the_wild" )
@@ -1896,7 +1897,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132270,
+        texture = "Interface\\Icons\\ability_physical_taunt",
 
         handler = function ()
         end,
@@ -1914,7 +1915,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136041,
+        texture = "Interface\\Icons\\spell_nature_healingtouch",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -1935,7 +1936,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136090,
+        texture = "Interface\\Icons\\spell_nature_sleep",
 
         handler = function ()
         end,
@@ -1957,7 +1958,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136018,
+        texture = "Interface\\Icons\\spell_nature_cyclone",
 
         aura = "hurricane",
         tick_time = function () return class.auras.hurricane.tick_time end,
@@ -1989,7 +1990,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = true,
-        texture = 136048,
+        texture = "Interface\\Icons\\spell_nature_lightning",
 
         toggle = "cooldowns",
 
@@ -2011,7 +2012,7 @@ spec:RegisterAbilities( {
 
         talent = "insect_swarm",
         startsCombat = true,
-        texture = 136045,
+        texture = "Interface\\Icons\\spell_nature_insectswarm",
 
         handler = function ()
             applyDebuff( "target", "insect_swarm" )
@@ -2031,7 +2032,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132131,
+        texture = "Interface\\Icons\\ability_druid_lacerate",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2051,7 +2052,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 134206,
+        texture = "Interface\\Icons\\inv_misc_herb_felblossom",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2071,7 +2072,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132134,
+        texture = "Interface\\Icons\\ability_druid_mangle.tga",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -2098,7 +2099,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132135,
+        texture = "Interface\\Icons\\ability_druid_mangle2",
 
         handler = function()
             removeDebuff( "mangle" )
@@ -2121,7 +2122,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132135,
+        texture = "Interface\\Icons\\ability_druid_mangle2",
 
         handler = function()
             removeDebuff( "target", "mangle" )
@@ -2147,7 +2148,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 132136,
+        texture = "Interface\\Icons\\ability_druid_maul",
 
         nobuff = "maul",
 
@@ -2174,7 +2175,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136078,
+        texture = "Interface\\Icons\\spell_nature_regeneration",
 
         handler = function ()
             applyBuff( "mark_of_the_wild" )
@@ -2195,7 +2196,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136096,
+        texture = "Interface\\Icons\\spell_nature_starfall",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2218,7 +2219,7 @@ spec:RegisterAbilities( {
 
         talent = "moonkin_form",
         startsCombat = true,
-        texture = 136036,
+        texture = "Interface\\Icons\\spell_nature_forceofnature",
 
         handler = function ()
             swap_form( "moonkin_form" )
@@ -2234,7 +2235,7 @@ spec:RegisterAbilities( {
         gcd = "spell",
 
         startsCombat = true,
-        texture = 136063,
+        texture = "Interface\\Icons\\spell_nature_natureswrath",
 
         toggle = "cooldowns",
 
@@ -2255,7 +2256,7 @@ spec:RegisterAbilities( {
 
         talent = "natures_swiftness",
         startsCombat = true,
-        texture = 136076,
+        texture = "Interface\\Icons\\spell_nature_ravenform",
 
         toggle = "cooldowns",
 
@@ -2276,7 +2277,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 236162,
+        texture = "Interface\\Icons\\ability_druid_nourish",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2295,7 +2296,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132142,
+        texture = "Interface\\Icons\\ability_druid_supriseattack",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2317,7 +2318,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132089,
+        texture = "Interface\\Icons\\ability_ambush",
 
         handler = function ()
             applyBuff( "prowl" )
@@ -2336,7 +2337,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132122,
+        texture = "Interface\\Icons\\ability_druid_disembowel",
 
         readyTime = function() return debuff.rake.remains end,
 
@@ -2359,7 +2360,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132141,
+        texture = "Interface\\Icons\\ability_druid_ravage",
 
         buff = "prowl",
 
@@ -2381,7 +2382,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136080,
+        texture = "Interface\\Icons\\spell_nature_reincarnation",
 
         toggle = "cooldowns",
 
@@ -2404,7 +2405,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136085,
+        texture = "Interface\\Icons\\spell_nature_resistnature",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2426,7 +2427,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136081,
+        texture = "Interface\\Icons\\spell_nature_rejuvenation",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2447,7 +2448,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135952,
+        texture = "Interface\\Icons\\spell_holy_removecurse",
 
         handler = function ()
         end,
@@ -2465,7 +2466,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132132,
+        texture = "Interface\\Icons\\ability_druid_lunarguidance",
 
         handler = function ()
         end,
@@ -2490,7 +2491,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132152,
+        texture = "Interface\\Icons\\ability_ghoulfrenzy",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
         readyTime = function() return debuff.rip.remains end, -- Clipping rip is a DPS loss and an unpredictable recommendation. AP snapshot on previous rip will prevent overriding
@@ -2519,7 +2520,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = false,
-        texture = 236167,
+        texture = "Interface\\Icons\\ability_druid_skinteeth",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -2545,7 +2546,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 136231,
+        texture = "Interface\\Icons\\spell_shadow_vampiricaura",
 
         handler = function ()
             if glyph.shred.enabled and debuff.rip.up and rip_tracker[target.unit].extension < 6 then
@@ -2569,7 +2570,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132163,
+        texture = "Interface\\Icons\\ability_hunter_beastsoothe",
 
         handler = function ()
         end,
@@ -2590,7 +2591,7 @@ spec:RegisterAbilities( {
 
         talent = "starfall",
         startsCombat = true,
-        texture = 236168,
+        texture = "Interface\\Icons\\ability_druid_starfall",
 
         toggle = "cooldowns",
 
@@ -2611,7 +2612,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 135753,
+        texture = "Interface\\Icons\\spell_arcane_starfire",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2637,7 +2638,7 @@ spec:RegisterAbilities( {
 
         talent = "survival_instincts",
         startsCombat = true,
-        texture = 236169,
+        texture = "Interface\\Icons\\ability_druid_tigersroar",
 
         toggle = "cooldowns",
 
@@ -2658,7 +2659,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132128,
+        texture = "Interface\\Icons\\ability_druid_flightform",
 
         handler = function ()
             swap_form( "swift_flight_form" )
@@ -2678,7 +2679,7 @@ spec:RegisterAbilities( {
 
         talent = "swiftmend",
         startsCombat = true,
-        texture = 134914,
+        texture = "Interface\\Icons\\inv_relics_idolofrejuvenation",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2700,7 +2701,7 @@ spec:RegisterAbilities( {
         spendType = "rage",
 
         startsCombat = true,
-        texture = 134296,
+        texture = "Interface\\Icons\\inv_misc_monsterclaw_03",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2719,7 +2720,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 134296,
+        texture = "Interface\\Icons\\inv_misc_monsterclaw_03",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2738,7 +2739,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136104,
+        texture = "Interface\\Icons\\spell_nature_thorns",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2760,7 +2761,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132242,
+        texture = "Interface\\Icons\\ability_mount_jungletiger",
 
         usable = function() return not buff.berserk.up end,
 
@@ -2781,7 +2782,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132328,
+        texture = "Interface\\Icons\\ability_tracking",
 
         handler = function ()
         end,
@@ -2799,7 +2800,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136107,
+        texture = "Interface\\Icons\\spell_nature_tranquility",
 
         toggle = "cooldowns",
 
@@ -2822,7 +2823,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 132144,
+        texture = "Interface\\Icons\\ability_druid_travelform",
 
         handler = function ()
             swap_form( "travel_form" )
@@ -2842,7 +2843,7 @@ spec:RegisterAbilities( {
 
         talent = "typhoon",
         startsCombat = true,
-        texture = 236170,
+        texture = "Interface\\Icons\\ability_druid_typhoon",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2858,7 +2859,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = true,
-        texture = 132368,
+        texture = "Interface\\Icons\\ability_warstomp",
 
         toggle = "cooldowns",
 
@@ -2879,7 +2880,7 @@ spec:RegisterAbilities( {
 
         talent = "wild_growth",
         startsCombat = true,
-        texture = 236153,
+        texture = "Interface\\Icons\\ability_druid_flourish",
 
         handler = function ()
             removeBuff( "clearcasting" )
@@ -2898,7 +2899,7 @@ spec:RegisterAbilities( {
         spendType = "mana",
 
         startsCombat = true,
-        texture = 136006,
+        texture = "Interface\\Icons\\spell_nature_abolishmagic",
 
         handler = function ()
             removeBuff( "clearcasting" )

@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 if UnitClassBase( 'player' ) ~= 'ROGUE' then return end
 
 local addon, ns = ...
@@ -562,7 +563,7 @@ spec:RegisterAbilities( {
 
         talent = "adrenaline_rush",
         startsCombat = false,
-        texture = 136206,
+        texture = "Interface\\Icons\\spell_shadow_shadowworddominate",
 
         toggle = "cooldowns",
 
@@ -584,7 +585,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132282,
+        texture = "Interface\\Icons\\ability_rogue_ambush",
 
         usable = function() return stealthed.all, "must be in stealth" end,
 
@@ -610,7 +611,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132090,
+        texture = "Interface\\Icons\\ability_backstab",
 
         usable = function() return stealthed.all, "must be in stealth" end,
 
@@ -637,7 +638,7 @@ spec:RegisterAbilities( {
 
         talent = "blade_flurry",
         startsCombat = false,
-        texture = 132350,
+        texture = "Interface\\Icons\\ability_warrior_punishingblow",
 
         toggle = "cooldowns",
 
@@ -658,7 +659,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 136175,
+        texture = "Interface\\Icons\\spell_shadow_mindsteal",
 
         toggle = "interrupts",
 
@@ -679,7 +680,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132092,
+        texture = "Interface\\Icons\\ability_cheapshot",
 
         usable = function() return stealthed.all, "must be in stealth" end,
 
@@ -698,7 +699,7 @@ spec:RegisterAbilities( {
         gcd = "totem",
 
         startsCombat = false,
-        texture = 136177,
+        texture = "Interface\\Icons\\spell_shadow_nethercloak",
 
         toggle = "defensives",
 
@@ -720,7 +721,7 @@ spec:RegisterAbilities( {
 
         talent = "cold_blood",
         startsCombat = false,
-        texture = 135988,
+        texture = "Interface\\Icons\\spell_ice_lament",
 
         toggle = "cooldowns",
 
@@ -743,7 +744,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 135430,
+        texture = "Interface\\Icons\\inv_throwingknife_06",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -768,7 +769,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 236272,
+        texture = "Interface\\Icons\\ability_rogue_dismantle",
 
         toggle = "cooldowns",
 
@@ -789,7 +790,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = false,
-        texture = 132289,
+        texture = "Interface\\Icons\\ability_rogue_distract",
 
         handler = function ()
         end,
@@ -807,7 +808,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132287,
+        texture = "Interface\\Icons\\ability_rogue_disembowel",
 
         usable = function()
             if combo_points.current == 0 then
@@ -848,7 +849,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = false,
-        texture = 136205,
+        texture = "Interface\\Icons\\spell_shadow_shadowward",
 
         toggle = "defensives",
 
@@ -871,7 +872,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132292,
+        texture = "Interface\\Icons\\ability_rogue_eviscerate",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -898,7 +899,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132354,
+        texture = "Interface\\Icons\\ability_warrior_riposte",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -919,7 +920,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 236273,
+        texture = "Interface\\Icons\\ability_rogue_fanofknives",
 
         handler = function ()
         end,
@@ -937,7 +938,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = false,
-        texture = 132294,
+        texture = "Interface\\Icons\\ability_rogue_feint",
 
         handler = function ()
             applyBuff( "feint" )
@@ -958,7 +959,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132297,
+        texture = "Interface\\Icons\\ability_rogue_garrote",
 
         usable = function() return stealthed.all, "must be in stealth" end,
 
@@ -984,7 +985,7 @@ spec:RegisterAbilities( {
 
         talent = "ghostly_strike",
         startsCombat = true,
-        texture = 136136,
+        texture = "Interface\\Icons\\spell_shadow_curse",
 
         handler = function ()
             applyBuff( "ghostly_strike" )
@@ -1005,7 +1006,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132155,
+        texture = "Interface\\Icons\\ability_gouge",
 
         handler = function ()
             applyDebuff( "target", "gouge" )
@@ -1026,7 +1027,7 @@ spec:RegisterAbilities( {
 
         talent = "hemorrhage",
         startsCombat = true,
-        texture = 136168,
+        texture = "Interface\\Icons\\spell_shadow_lifedrain",
 
         handler = function ()
             applyDebuff( "target", "hemorrhage", nil, 10 )
@@ -1050,7 +1051,7 @@ spec:RegisterAbilities( {
 
         talent = "hunger_for_blood",
         startsCombat = true,
-        texture = 236276,
+        texture = "Interface\\Icons\\ability_rogue_hungerforblood",
 
         usable = function()
             return debuff.bleed.up
@@ -1073,7 +1074,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132219,
+        texture = "Interface\\Icons\\ability_kick",
 
         toggle = "interrupts",
 
@@ -1098,7 +1099,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132298,
+        texture = "Interface\\Icons\\ability_rogue_kidneyshot",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -1123,7 +1124,7 @@ spec:RegisterAbilities( {
 
         talent = "killing_spree",
         startsCombat = true,
-        texture = 236277,
+        texture = "Interface\\Icons\\ability_rogue_murderspree",
 
         toggle = "cooldowns",
 
@@ -1146,7 +1147,7 @@ spec:RegisterAbilities( {
 
         talent = "mutilate",
         startsCombat = true,
-        texture = 132304,
+        texture = "Interface\\Icons\\ability_rogue_shadowstrikes",
 
         handler = function ()
             gain( 2, "combo_points" )
@@ -1169,7 +1170,7 @@ spec:RegisterAbilities( {
 
         talent = "premeditation",
         startsCombat = false,
-        texture = 136183,
+        texture = "Interface\\Icons\\spell_shadow_possession",
 
         usable = function() return stealthed.all, "must be in stealth" end,
 
@@ -1188,7 +1189,7 @@ spec:RegisterAbilities( {
 
         talent = "preparation",
         startsCombat = false,
-        texture = 136121,
+        texture = "Interface\\Icons\\spell_shadow_antishadow",
 
         toggle = "cooldowns",
 
@@ -1220,7 +1221,7 @@ spec:RegisterAbilities( {
 
         talent = "riposte",
         startsCombat = true,
-        texture = 132336,
+        texture = "Interface\\Icons\\ability_warrior_challange",
 
         handler = function ()
             applyDebuff( "target", "riposte" )
@@ -1240,7 +1241,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132302,
+        texture = "Interface\\Icons\\ability_rogue_rupture",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -1264,7 +1265,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132310,
+        texture = "Interface\\Icons\\ability_sap",
 
         usable = function() return stealthed.all, "must be in stealth" end,
 
@@ -1285,7 +1286,7 @@ spec:RegisterAbilities( {
 
         talent = "shadow_dance",
         startsCombat = false,
-        texture = 236279,
+        texture = "Interface\\Icons\\ability_rogue_shadowdance",
 
         toggle = "cooldowns",
 
@@ -1307,7 +1308,7 @@ spec:RegisterAbilities( {
 
         talent = "shadowstep",
         startsCombat = true,
-        texture = 132303,
+        texture = "Interface\\Icons\\ability_rogue_shadowstep",
 
         handler = function ()
             applyBuff( "shadowstep_sprint" )
@@ -1328,7 +1329,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 135428,
+        texture = "Interface\\Icons\\inv_throwingknife_04",
 
         handler = function ()
             -- TODO: Apply offhand poison.
@@ -1352,7 +1353,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 136189,
+        texture = "Interface\\Icons\\spell_shadow_ritualofsacrifice",
 
         handler = function ()
             gain( 1, "combo_points" )
@@ -1374,7 +1375,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132306,
+        texture = "Interface\\Icons\\ability_rogue_slicedice",
 
         usable = function() return combo_points.current > 0, "requires combo_points" end,
 
@@ -1395,7 +1396,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132307,
+        texture = "Interface\\Icons\\ability_rogue_sprint",
 
         toggle = "interrupts",
 
@@ -1415,7 +1416,7 @@ spec:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 132320,
+        texture = "Interface\\Icons\\ability_stealth",
 
         usable = function() return time == 0, "cannot be in combat" end,
 
@@ -1436,7 +1437,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = false,
-        texture = 236283,
+        texture = "Interface\\Icons\\ability_rogue_tricksofthetrade",
 
         handler = function ()
             applyBuff( "tricks_of_the_trade" )
@@ -1455,7 +1456,7 @@ spec:RegisterAbilities( {
         spendType = "energy",
 
         startsCombat = true,
-        texture = 132331,
+        texture = "Interface\\Icons\\ability_vanish",
 
         toggle = "cooldowns",
 

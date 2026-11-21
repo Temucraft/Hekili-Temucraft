@@ -1,3 +1,4 @@
+setfenv( 1, HekiliTemucraft.env ) -- Temucraft: globals through the 3.3.5 port table (Temucraft.lua)
 -- Classes.lua
 -- July 2014
 
@@ -24,14 +25,14 @@ local insert, wipe = table.insert, table.wipe
 
 local mt_resource = ns.metatables.mt_resource
 
-local GetItemCooldown = _G.C_Container.GetItemCooldown
+local GetItemCooldown = GetItemCooldown
 
 local GetPlayerAuraBySpellID = _G.GetPlayerAuraBySpellID or function( id ) return FindUnitBuffByID( "player", id ) end
 
 local GetSpellDescription, GetSpellTexture = _G.GetSpellDescription, _G.GetSpellTexture
 
-local GetSpecialization = _G.GetSpecialization or function() return GetActiveTalentGroup() end
-local GetSpecializationInfo = _G.GetSpecializationInfo or function()
+local GetSpecialization = GetSpecialization or function() return GetActiveTalentGroup() end
+local GetSpecializationInfo = GetSpecializationInfo or function()
     local name, baseName, id = UnitClass( "player" )
     return id, baseName, name
 end
@@ -2925,7 +2926,7 @@ all:RegisterAbilities( {
         gcd = "off",
 
         startsCombat = false,
-        texture = 136129,
+        texture = "Interface\\Icons\\spell_shadow_charm",
 
         toggle = "defensives",
 
@@ -3391,7 +3392,7 @@ all:RegisterAbilities( {
         bagItem = true,
 
         startsCombat = false,
-        texture = 134209,
+        texture = "Interface\\Icons\\inv_misc_herb_flamecap",
         toggle = "cooldowns",
 
         usable = function ()
@@ -3428,7 +3429,7 @@ all:RegisterAbilities( {
         bagItem = true,
 
         startsCombat = true,
-        texture = 135826,
+        texture = "Interface\\Icons\\spell_fire_selfdestruct",
         toggle = "cooldowns",
 
         usable = function ()
@@ -3460,7 +3461,7 @@ all:RegisterAbilities( {
         bagItem = true,
 
         startsCombat = false,
-        texture = 538745,
+        texture = nil, -- Temucraft: icon 538745 is not in the 3.3.5 client; the spell icon is used
 
         usable = function ()
             if GetItemCount( 5512 ) == 0 then return false, "requires healthstone in bags"
@@ -4236,7 +4237,7 @@ do
             gcd = "spell",
 
             -- item = 167555,
-            texture = 2115322,
+            texture = nil, -- Temucraft: icon 2115322 is not in the 3.3.5 client; the spell icon is used
             bind = { "cyclotronic_blast", "harmonic_dematerializer", "inactive_red_punchcard" },
             startsCombat = true,
 
@@ -4258,7 +4259,7 @@ do
             itemCd = 167555,
             itemKey = "cyclotronic_blast",
 
-            texture = 2115322,
+            texture = nil, -- Temucraft: icon 2115322 is not in the 3.3.5 client; the spell icon is used
             bind = { "pocketsized_computation_device", "inactive_red_punchcard", "harmonic_dematerializer" },
             startsCombat = true,
 
@@ -4293,7 +4294,7 @@ do
             itemCd = 167555,
             itemKey = "harmonic_dematerializer",
 
-            texture = 2115322,
+            texture = nil, -- Temucraft: icon 2115322 is not in the 3.3.5 client; the spell icon is used
 
             bind = { "pocketsized_computation_device", "cyclotronic_blast", "inactive_red_punchcard" },
 
@@ -5555,7 +5556,7 @@ do
         gcd = "off",
 
         items = { 162966, 161902, 165223, 165058, 167528, 167380, 172849, 172669, 175884, 175921, 185161, 185197, 186906, 186866, 192352, 192295 },
-        texture = 135884,
+        texture = "Interface\\Icons\\spell_holy_championsbond",
 
         toggle = "cooldowns",
         item = function ()
@@ -6167,7 +6168,7 @@ all:RegisterAbility( "kiljaedens_burning_wish", {
     cooldown = 75,
     gcd = 'off',
 
-    texture = 1357805,
+    texture = nil, -- Temucraft: icon 1357805 is not in the 3.3.5 client; the spell icon is used
 
     toggle = 'cooldowns',
 } )
