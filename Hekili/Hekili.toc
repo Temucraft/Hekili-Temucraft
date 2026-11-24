@@ -1,5 +1,5 @@
 ## Interface: 30300
-## Version: 3.3.5-1.0.0
+## Version: 3.3.5-1.0.1
 ## Title: Hekili (Temucraft)
 ## Author: Hekili (3.3.5 port: Temucraft)
 ## Dependencies: !TemucraftCompat

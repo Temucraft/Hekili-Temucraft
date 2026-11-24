@@ -17,7 +17,7 @@ local round, roundUp, roundDown = ns.round, ns.roundUp, ns.roundDown
 local safeMin, safeMax = ns.safeMin, ns.safeMax
 
 -- Clean up table_x later.
-local insert, remove, sort, tcopy, unpack, wipe = table.insert, table.remove, table.sort, ns.tableCopy, table.unpack, table.wipe
+local insert, remove, sort, tcopy, unpack, wipe = table.insert, table.remove, table.sort, ns.tableCopy, table.unpack or unpack, table.wipe or wipe
 local format = string.format
 
 local Mark, SuperMark, ClearMarks = ns.Mark, ns.SuperMark, ns.ClearMarks
